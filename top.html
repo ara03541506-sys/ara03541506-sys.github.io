@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>市民ランナーの長距離ブログ</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="min-h-screen bg-white text-gray-800">
+  <!-- ヘッダー -->
+  <header class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 shadow-md">
+    <h1 class="text-3xl font-bold">市民ランナーの長距離ブログ</h1>
+    <p class="text-sm mt-1"></p>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- 最新記事セクション -->
+    <section class="md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4">最新記事</h2>
+      <div class="grid gap-4">
+        <!-- サンプル記事カード -->
+        <a href="puma_deviate.html" class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white">
+          <img src="deviate.jpg" alt="deviateシューズ画像" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-orange-600 hover:underline">PUMA ディビエイトニトロエリート　レビュー</h3>
+            <p class="text-sm text-gray-600 mt-1">誰にでも履ける万能神シューズ！</p>
+            <!-- "続きを読む"ボタンは静的サイトでは機能しないため削除 -->
+          </div>
+        </a>
+        <div class="cursor-pointer transition-transform hover:scale-105">
+          <div class="rounded-2xl shadow-sm overflow-hidden bg-white">
+            <img src="https://source.unsplash.com/800x400/?running,track&sig=2" alt="ランニング画像" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-lg font-bold">〇〇大会レポート #2</h3>
+              <p class="text-sm text-gray-600 mt-1">ペース配分や大会の雰囲気をまとめました。</p>
+              <!-- "続きを読む"ボタンは静的サイトでは機能しないため削除 -->
+            </div>
+          </div>
+        </div>
+        <div class="cursor-pointer transition-transform hover:scale-105">
+          <div class="rounded-2xl shadow-sm overflow-hidden bg-white">
+            <img src="https://source.unsplash.com/800x400/?running,track&sig=3" alt="ランニング画像" class="w-full h-48 object-cover" />
+            <div class="p-4">
+              <h3 class="text-lg font-bold">〇〇大会レポート #3</h3>
+              <p class="text-sm text-gray-600 mt-1">ペース配分や大会の雰囲気をまとめました。</p>
+              <!-- "続きを読む"ボタンは静的サイトでは機能しないため削除 -->
+</div>
+<script>
+// カードにマウスオーバーでアニメーション
+document.querySelectorAll('.cursor-pointer').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'scale(1.05)';
+    card.style.transition = 'transform 0.2s';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'scale(1)';
+  });
+});
+</script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- サイドバー -->
+    <aside>
+      <div class="rounded-2xl mb-6 bg-white shadow">
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-user"></i> プロフィール
+          </h2>
+          <p class="text-sm text-gray-700">
+            5000mベスト: 16分台を目指して練習中。<br />
+            好きなコースは河川敷ラン！
+          </p>
+        </div>
+      </div>
+      <div class="rounded-2xl mb-6 bg-white shadow">
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-tags"></i> カテゴリー一覧
+          </h2>
+          <ul class="text-sm text-gray-700 space-y-1" id="category-list">
+            <li><a href="category_puma.html" class="text-blue-600 hover:underline">PUMA</a></li>
+            <li><a href="category_adidas.html" class="text-blue-600 hover:underline">Adidas</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- フッター -->
+  <footer class="text-center text-gray-500 text-sm p-6 border-t mt-10">
+    © hirotoarahata. All rights reserved.
+  </footer>
+</body>
+</html>
