@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カテゴリー：プログラミング</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-800 leading-relaxed">
+  <header class="bg-gradient-to-r from-gray-700 to-black text-white p-8 shadow-md text-center">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">カテゴリー：プログラミング</h1>
+    <p class="text-sm mt-2">プログラミング関連のブログ記事一覧</p>
+    <a href="category_program.html" class="inline-flex mt-5 px-5 py-2 bg-white text-gray-700 font-semibold rounded-xl shadow hover:bg-gray-100 border border-gray-300 transition-all items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> <span>トップに戻る</span>
+    </a>
+  </header>
+  <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="md:col-span-2 space-y-8">
+      <h2 class="text-xl font-semibold mb-4"><i class="fa-solid fa-code"></i> プログラミング記事</h2>
+      <div class="grid gap-6">
+        <!-- プログラミング記事自動挿入例 -->
+        <div class="rounded-2xl shadow-sm overflow-hidden bg-white p-4 border" data-category="プログラミング">
+          <img src="../画像/MacBookAir.jpeg" class="w-full h-60 object-contain rounded-lg mb-3">
+          <h3 class="text-lg font-bold mb-2">初めてのMac</h3>
+          <p class="text-sm text-gray-700 mb-2">WindowsからMacに乗り換えてみた感想</p>
+          <a href="startmac.html" class="inline-block px-4 py-2 bg-gray-700 text-white rounded-lg font-semibold shadow hover:bg-gray-800">記事を読む</a>
+        </div>
+        <!-- 他のプログラミング記事もここに追加可能 -->
+      </div>
+    </section>
+    <aside class="space-y-6">
+      <div class="rounded-2xl mb-6 bg-white shadow p-5">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-tags text-gray-700"></i> カテゴリー一覧
+        </h2>
+        <ul class="text-sm text-gray-700 space-y-1" id="category-list">
+          <li><a href="category_program.html" class="text-blue-600 hover:underline">プログラミング</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+  <footer class="text-center text-gray-500 text-sm p-6 border-t mt-10">
+    <a href="privacypolicy.html" class="text-blue-600 hover:underline">プライバシーポリシー</a><br>
+    © 市民ランナーの長距離ブログ. All rights reserved.
+  </footer>
+</body>
+</html>
