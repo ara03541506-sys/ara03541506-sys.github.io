@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5788743486732787"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Macで仮想環境を構築し、Pythonコードを動かすまで</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-800 leading-relaxed">
+
+  <!-- ヘッダー -->
+  <header class="bg-gradient-to-r from-gray-700 to-black text-white p-8 shadow-md text-center">
+    <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+      <strong>Macで仮想環境を構築し、Pythonコードを動かす</strong>
+    </h1>
+    <p class="text-base mt-2">MacでPython開発環境を整える手順</p>
+    <a href="category_program.html"
+       class="inline-flex mt-5 px-5 py-2 bg-white text-gray-700 font-semibold rounded-xl shadow hover:bg-gray-100 border border-gray-300 transition-all items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span><strong>トップに戻る</strong></span>
+    </a>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- 記事本体 -->
+    <section class="md:col-span-2 space-y-8">
+
+      <!-- 目次 -->
+      <nav class="p-5 bg-white rounded-2xl border shadow-sm">
+        <h2 class="text-lg font-bold mb-3 flex items-center gap-2 text-gray-800">
+          <i class="fa-solid fa-list text-gray-700"></i> <strong>目次</strong>
+        </h2>
+        <ul class="list-disc ml-6 text-blue-700 space-y-1">
+          <li><a href="#intro" class="hover:underline"><strong>はじめに</strong></a></li>
+          <li><a href="#create-folder" class="hover:underline"><strong>フォルダを作成</strong></a></li>
+          <li><a href="#venv" class="hover:underline"><strong>仮想環境の構築</strong></a></li>
+          <li><a href="#activate" class="hover:underline"><strong>仮想環境を有効化</strong></a></li>
+          <li><a href="#run-code" class="hover:underline"><strong>Pythonコードを実行</strong></a></li>
+        </ul>
+      </nav>
+
+      <!-- 本文 -->
+      <article class="space-y-10">
+
+        <!-- はじめに -->
+        <div id="intro" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2"><strong>はじめに</strong></h2>
+          <p>
+            今回はタイトルの通り、<strong>Macで仮想環境を構築し、Pythonのコードを動かす</strong>方法を解説します。  
+            なぜわざわざ文章で書くかというと、WindowsとMacではコマンドが微妙に異なるからですね。 
+          </p>
+        </div>
+
+        <!-- フォルダを作成 -->
+        <div id="create-folder" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2"><strong>フォルダを作成</strong></h2>
+          <p>
+            まずは作業用のフォルダを作成します。私は以下のような構成にしています。
+          </p>
+          <pre class="bg-gray-100 text-gray-800 p-4 rounded-lg overflow-x-auto text-sm"><code>workspace/
+ ├── venv/        ← 仮想環境を置く場所
+ └── classes/     ← Pythonファイルを置く場所
+</code></pre>
+          <p>
+            VSコードを起動し、ターミナルから作業します。  
+            以降のコマンドはすべてターミナルに入力します。
+          </p>
+        </div>
+
+        <!-- 仮想環境を構築 -->
+        <div id="venv" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2"><strong>仮想環境を構築</strong></h2>
+          <p>
+            まずはPythonの仮想環境を作成します。  
+            Macの場合、以下のコマンドを入力します。
+          </p>
+          <pre class="bg-gray-100 text-gray-800 p-4 rounded-lg overflow-x-auto text-sm"><code>python3 -m venv venv</code></pre>
+          <p>
+            Windowsでは <code>python -m venv venv</code> と書いていましたが、Macでは <code>python3</code> になります。  
+            理由は軽く読みましたが理解する必要はなさそうなので、そういうものだと思いましょう。
+          </p>
+        </div>
+
+        <!-- 仮想環境を有効化 -->
+        <div id="activate" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2"><strong>仮想環境を有効化</strong></h2>
+          <p>
+            次に、作成した仮想環境を有効化します。  
+            Windowsとコマンドが異なります。
+          </p>
+          <ul class="list-disc ml-6 text-gray-700 space-y-1">
+            <li>Windows：<code>.\venv\Scripts\activate</code></li>
+            <li>Mac：<code>source venv/bin/activate</code></li>
+          </ul>
+          <p>
+            Macでは「<code>source</code>」というコマンドを使って仮想環境を起動します。  
+            また、Windowsでは <code>Scripts</code> フォルダ内にactivate.batがありますが、  
+            Macでは <code>bin</code> フォルダの中にあります。
+          </p>
+          <p>
+            コマンド実行後、ターミナルの先頭に <code>(venv)</code> と表示されれば成功です。
+          </p>
+        </div>
+
+        <!-- Pythonコードを実行 -->
+        <div id="run-code" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2"><strong>Pythonコードを実行</strong></h2>
+          <p>
+            仮想環境を有効化できたら、次にPythonファイルを動かしてみましょう。
+          </p>
+          <p>
+            まず <code>classes</code> フォルダに <strong>hello.py</strong> というファイルを作成します。  
+            中身は以下の1行だけです。
+          </p>
+          <pre class="bg-gray-100 text-gray-800 p-4 rounded-lg overflow-x-auto text-sm"><code>print("Hello, World!")</code></pre>
+          <p>
+            実行は以下のコマンドで行います。
+          </p>
+          <pre class="bg-gray-100 text-gray-800 p-4 rounded-lg overflow-x-auto text-sm"><code>python3 -m classes.hello</code></pre>
+          <p>
+            ターミナルに「<strong>Hello, World!</strong>」と表示されたら成功です。  
+            これでMac上にPythonの仮想環境を構築し、コードを実行できるようになりました。
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- サイドバー -->
+    <aside class="space-y-6">
+      <div class="rounded-2xl bg-white shadow p-5">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-book-open text-gray-700"></i> <strong>関連記事</strong>
+        </h2>
+        <ul class="text-sm text-blue-600 space-y-2">
+          <li><a href="blog_dev_env.html" class="hover:underline"><strong>Macで開発環境を整える</strong></a></li>
+          <li><a href="blog_windows_shortcut.html" class="hover:underline"><strong>WindowsとMacのショートカット比較</strong></a></li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl bg-white shadow p-5">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-tags text-gray-500"></i> カテゴリー一覧
+        </h2>
+        <ul class="text-sm text-blue-600 space-y-2" id="category-list">
+          <li><a href="category_program.html" class="text-blue-600 hover:underline">プログラミング</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- フッター -->
+  <footer class="text-center text-gray-500 text-sm p-6 border-t mt-10">
+    © <strong>hirotoarahata</strong>. All rights reserved.
+  </footer>
+
+</body>
+</html>
