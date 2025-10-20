@@ -44,11 +44,11 @@
         <div class="grid gap-4">
           <!-- サンプル記事カード -->
           <a
-            href="nike_dragonelite.html"
+            href="running/nike_dragonelite.html"
             class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
           >
             <img
-              src="../画像/doragonelite.jpg"
+              src="画像/doragonelite.jpg"
               class="w-full h-48 object-cover"
             />
             <div class="p-4">
@@ -64,11 +64,11 @@
           <div class="grid gap-4">
             <!-- サンプル記事カード -->
             <a
-              href="adidas_takumi11.html"
+              href="runing/adidas_takumi11.html"
               class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
             >
               <img
-                src="../画像/takumi11.jpg"
+                src="画像/takumi11.jpg"
                 class="w-full h-48 object-cover"
               />
               <div class="p-4">
@@ -84,11 +84,11 @@
             <div class="grid gap-4">
               <!-- サンプル記事カード -->
               <a
-                href="puma_deviate.html"
+                href="running/puma_deviate.html"
                 class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
               >
                 <img
-                  src="../画像/deviate.png"
+                  src="画像/deviate.png"
                   class="w-full h-48 object-cover"
                 />
                 <div class="p-4">
@@ -106,11 +106,13 @@
       </section>
 
       <!-- サイドバー -->
-      <div data-include="sidebar.html"></div>
+       <aside class="space-y-6">
+      <div data-include="running/sidebar.html"></div>
+      </aside>
     </main>
 
     <!-- フッター -->
-    <div data-include="footer.html"></div>
+    <div data-include="running/footer.html"></div>
 
     <script>
       // カードにマウスオーバーでアニメーション
@@ -126,13 +128,48 @@
     </script>
 
     <script>
-      // 汎用インクルード関数
+      // 汎用インクルード関数（index.html用に running/sidebar.html を読み込む際にリンクを書き換える処理を追加）
       document.querySelectorAll("[data-include]").forEach(async (el) => {
         const file = el.getAttribute("data-include");
         try {
           const response = await fetch(file);
           if (!response.ok) throw new Error(response.statusText);
           el.innerHTML = await response.text();
+
+          // index.html から running/sidebar.html を読み込む場合、相対リンクに "running/" を付与（ただし mac/ は除外）
+          try {
+            const isIndex = location.pathname.endsWith("index.html") || location.pathname === "/" || location.pathname.endsWith("/blog/") || location.pathname.endsWith("/blog");
+            if (isIndex && file === "running/sidebar.html") {
+              el.querySelectorAll("a").forEach((a) => {
+                let href = a.getAttribute("href") || "";
+                // 変更しないパターンを列挙（絶対URL・ルート相対・アンカー等）
+                const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
+                // もし ../mac/... の形式なら ../ を削除して mac/... のままにする（running/ は付けない）
+                if (/^(\.\.\/)+mac\//.test(href)) {
+                  href = href.replace(/^(\.\.\/)+/, "");
+                  a.setAttribute("href", href);
+                  return;
+                }
+                // もし ./mac/... の形式なら ./ を削除して mac/... のままにする
+                if (/^\.\/mac\//.test(href)) {
+                  href = href.replace(/^\.\/+/, "");
+                  a.setAttribute("href", href);
+                  return;
+                }
+                // mac/ で始まる絶対的な mac パスもそのままにする
+                if (href.startsWith("mac/")) {
+                  return;
+                }
+                // それ以外で上記スキップパターンに合致しなければ running/ を付与
+                if (href && !skipPattern.test(href)) {
+                  a.setAttribute("href", "running/" + href);
+                }
+              });
+            }
+          } catch (e2) {
+            console.error("sidebarリンク書換エラー:", e2);
+          }
+
         } catch (e) {
           el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
           console.error(e);
