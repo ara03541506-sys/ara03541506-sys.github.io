@@ -11,6 +11,13 @@
     <title>市民ランナーの長距離ブログ</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 画像の高さを制限して比率を保つ（カード内画像の崩れ対策） */
+    .card-image { height: 10rem; object-fit: cover; width: 100%; display:block; }
+    /* カード全体の微調整 */
+    .card { transition: transform .18s ease, box-shadow .18s ease; }
+    .card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 30px rgba(16,24,40,0.08); }
+  </style>
     <!-- Font Awesome for icons -->
     <link
       rel="stylesheet"
@@ -64,7 +71,7 @@
           <div class="grid gap-4">
             <!-- サンプル記事カード -->
             <a
-              href="runing/adidas_takumi11.html"
+              href="running/adidas_takumi11.html"
               class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
             >
               <img
@@ -128,48 +135,46 @@
     </script>
 
     <script>
-      // 汎用インクルード関数（index.html用に running/sidebar.html を読み込む際にリンクを書き換える処理を追加）
+      // 安全なインクルード（sidebar の <aside> をそのまま差し込まず中身だけ挿入）
       document.querySelectorAll("[data-include]").forEach(async (el) => {
         const file = el.getAttribute("data-include");
         try {
-          const response = await fetch(file);
-          if (!response.ok) throw new Error(response.statusText);
-          el.innerHTML = await response.text();
+          const resp = await fetch(file);
+          if (!resp.ok) throw new Error(resp.statusText);
+          const text = await resp.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
 
-          // index.html から running/sidebar.html を読み込む場合、相対リンクに "running/" を付与（ただし mac/ は除外）
-          try {
-            const isIndex = location.pathname.endsWith("index.html") || location.pathname === "/" || location.pathname.endsWith("/blog/") || location.pathname.endsWith("/blog");
-            if (isIndex && file === "running/sidebar.html") {
-              el.querySelectorAll("a").forEach((a) => {
-                let href = a.getAttribute("href") || "";
-                // 変更しないパターンを列挙（絶対URL・ルート相対・アンカー等）
-                const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
-                // もし ../mac/... の形式なら ../ を削除して mac/... のままにする（running/ は付けない）
-                if (/^(\.\.\/)+mac\//.test(href)) {
-                  href = href.replace(/^(\.\.\/)+/, "");
-                  a.setAttribute("href", href);
-                  return;
-                }
-                // もし ./mac/... の形式なら ./ を削除して mac/... のままにする
-                if (/^\.\/mac\//.test(href)) {
-                  href = href.replace(/^\.\/+/, "");
-                  a.setAttribute("href", href);
-                  return;
-                }
-                // mac/ で始まる絶対的な mac パスもそのままにする
-                if (href.startsWith("mac/")) {
-                  return;
-                }
-                // それ以外で上記スキップパターンに合致しなければ running/ を付与
-                if (href && !skipPattern.test(href)) {
-                  a.setAttribute("href", "running/" + href);
-                }
-              });
-            }
-          } catch (e2) {
-            console.error("sidebarリンク書換エラー:", e2);
+          // running/sidebar.html を読み込む時は <aside> の中身だけを差し込む
+          if (file.endsWith("running/sidebar.html")) {
+            const fetchedAside = doc.querySelector("aside") || doc.body;
+            // リンク書換処理（index.html から呼ばれたときの running/ 調整）
+            fetchedAside.querySelectorAll("a").forEach((a) => {
+              let href = a.getAttribute("href") || "";
+              const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
+              if (/^(\.\.\/)+mac\//.test(href)) {
+                href = href.replace(/^(\.\.\/)+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+              if (/^\.\/mac\//.test(href)) {
+                href = href.replace(/^\.\/+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+              if (href && !skipPattern.test(href) && !href.startsWith("mac/")) {
+                a.setAttribute("href", "running/" + href);
+              }
+            });
+            // 中身だけを挿入
+            const frag = document.createDocumentFragment();
+            Array.from(fetchedAside.childNodes).forEach((n) => frag.appendChild(n.cloneNode(true)));
+            el.replaceWith(frag);
+            return;
           }
 
+          // それ以外はそのまま差し込む
+          el.innerHTML = text;
         } catch (e) {
           el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
           console.error(e);
