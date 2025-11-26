@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5788743486732787"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カテゴリー：ランニングシューズ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* card画像安定化 */
+    .card-image { width:100%; height:12rem; object-fit:cover; display:block; }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-gray-800">
+  <header class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 shadow-md text-center">
+    <h1 class="text-3xl font-bold">シューズ一覧</h1>
+    <p class="text-sm mt-1">ランニングシューズ関連のブログ記事一覧</p>
+    <a href="../index.html" class="inline-flex mt-5 px-5 py-2 bg-white text-orange-600 font-semibold rounded-xl shadow hover:bg-orange-100 border border-orange-300 transition-all items-center gap-2">
+      <i class="fa-solid fa-arrow-left"></i> <span>トップに戻る</span>
+    </a>
+  </header>
+  <main class="max-w-5xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-6 gap-4">
+      <h2 class="text-xl font-semibold">ランニングシューズ一覧</h2>
+
+      <!-- フィルターUI -->
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
+        <div class="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
+          <span class="text-sm mr-2 font-medium">カテゴリ</span>
+          <label class="inline-flex items-center text-sm mr-2"><input type="checkbox" class="filter-cat" value="Adidas"> <span class="ml-1">Adidas</span></label>
+          <label class="inline-flex items-center text-sm mr-2"><input type="checkbox" class="filter-cat" value="Nike"> <span class="ml-1">Nike</span></label>
+          <label class="inline-flex items-center text-sm mr-2"><input type="checkbox" class="filter-cat" value="PUMA"> <span class="ml-1">PUMA</span></label>
+          <label class="inline-flex items-center text-sm"><input type="checkbox" class="filter-cat" value="Asics"> <span class="ml-1">Asics</span></label>
+        </div>
+
+        <div class="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm">
+          <label class="text-sm font-medium mr-2">並び替え</label>
+          <select id="sort-select" class="text-sm border rounded px-2 py-1">
+            <option value="newest">最新順</option>
+            <option value="oldest">古い順</option>
+          </select>
+        </div>
+
+        <button id="clear-filters" class="bg-gray-100 text-sm px-3 py-1 rounded">クリア</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section class="md:col-span-2">
+        <div id="cards-grid" class="grid gap-6">
+
+<!-- 記事はここから -->
+<a href="adidas_takumi11.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Adidas" data-order="5">
+  <img src="../画像/takumi11.jpg" alt="アディゼロタクミセン11" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-20" class="text-xs text-gray-500">2025-11-20</time>
+      <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">adidas</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">アディゼロタクミセン11 レビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">ソールが柔らかくなり10から大幅アップデート!</p>
+  </div>
+</a>
+
+<a href="adidas_japan9.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Adidas" data-order="4">
+  <img src="../画像/japan9.jpg" alt="adidasjapan9" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-16" class="text-xs text-gray-500">2025-11-16</time>
+      <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">adidas</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">adidas Japan9レビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">ジョグシューは薄底も持て！</p>
+  </div>
+</a>
+
+<a href="adidas_pro4.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Adidas" data-order="4">
+  <img src="../画像/pro4_3.jpg" alt="アディオスプロ4" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-15" class="text-xs text-gray-500">2025-11-15</time>
+      <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">adidas</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">アディオスプロ4 レビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">厚底史上最高の１足。最速レビュー！</p>
+  </div>
+</a>
+
+<a href="asics_geruninbus.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Asics" data-order="3">
+  <img src="../画像/geruninbus.jpg" alt="ゲルニンバス26" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-10" class="text-xs text-gray-500">2025-11-10</time>
+      <span class="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full">Asics</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">ゲルニンバス26レビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">リカバリージョグにおすすめの１足！</p>
+  </div>
+</a>
+
+<a href="nike_dragonelite.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Nike" data-order="2">
+  <img src="../画像/doragonelite.jpg" alt="ドラゴンフライエリート" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-05" class="text-xs text-gray-500">2025-11-05</time>
+      <span class="text-xs px-2 py-1 bg-red-100 text-red-700 rounded-full">Nike</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">ドラゴンフライエリートレビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">反発が強くなりアップデート！</p>
+  </div>
+</a>
+
+<a href="puma_deviate.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="PUMA" data-order="1">
+  <img src="../画像/deviate.png" alt="PUMA ディヴィエイトニトロエリート3" class="card-image" />
+  <div class="p-4">
+    <div class="flex items-center justify-between mb-2">
+      <time datetime="2025-11-01" class="text-xs text-gray-500">2025-11-01</time>
+      <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full">PUMA</span>
+    </div>
+    <h3 class="text-lg font-bold text-orange-600 hover:underline">PUMA ディヴィエイトニトロエリート3 レビュー</h3>
+    <p class="text-sm text-gray-600 mt-1">誰にでも履ける万能シューズ！公式情報・履いた感想・おすすめポイントを詳しく解説。</p>
+  </div>
+</a>
+<!-- 記事はここまで -->
+
+        </div>
+      </section>
+
+      <!-- サイドバー -->
+      <aside class="md:col-span-1 space-y-6">
+        <div data-include="sidebar.html"></div>
+      </aside>
+    </div>
+    </main>
+
+    <!-- フッター -->
+    <div data-include="footer.html"></div>
+
+    <script>
+      // フィルターとソートの実装（複数チェック対応）
+      (function(){
+        const cardsGrid = document.getElementById('cards-grid');
+        const cardSelector = '.card';
+        const checkboxes = Array.from(document.querySelectorAll('.filter-cat'));
+        const sortSelect = document.getElementById('sort-select');
+        const clearBtn = document.getElementById('clear-filters');
+
+        function getSelectedCategories(){
+          return checkboxes.filter(c => c.checked).map(c => c.value);
+        }
+
+        function applyFiltersAndSort(){
+          const selected = getSelectedCategories();
+          const cards = Array.from(cardsGrid.querySelectorAll(cardSelector));
+
+          // フィルター
+          cards.forEach(card => {
+            const cat = (card.dataset.category || '').trim();
+            const visible = selected.length === 0 || selected.includes(cat);
+            card.style.display = visible ? '' : 'none';
+          });
+
+          // ソート（並び替えは DOM 上で re-append）
+          const visibleCards = Array.from(cardsGrid.querySelectorAll(cardSelector)).filter(c => c.style.display !== 'none');
+
+          if(sortSelect.value === 'newest'){
+            visibleCards.sort((a,b)=> (parseInt(b.dataset.order||0) - parseInt(a.dataset.order||0)));
+          } else if(sortSelect.value === 'oldest'){
+            visibleCards.sort((a,b)=> (parseInt(a.dataset.order||0) - parseInt(b.dataset.order||0)));
+          } else if(sortSelect.value === 'category'){
+            visibleCards.sort((a,b)=> {
+              const A = (a.dataset.category||'').toLowerCase();
+              const B = (b.dataset.category||'').toLowerCase();
+              if(A < B) return -1;
+              if(A > B) return 1;
+              return 0;
+            });
+          }
+
+          // 再描画
+          visibleCards.forEach(c => cardsGrid.appendChild(c));
+        }
+
+        // イベント
+        checkboxes.forEach(cb => cb.addEventListener('change', applyFiltersAndSort));
+        sortSelect.addEventListener('change', applyFiltersAndSort);
+        clearBtn.addEventListener('click', () => {
+          checkboxes.forEach(cb => cb.checked = false);
+          sortSelect.value = 'newest';
+          applyFiltersAndSort();
+        });
+
+        // 初期適用
+        document.addEventListener('DOMContentLoaded', applyFiltersAndSort);
+      })();
+    </script>
+
+    <script>
+      // 汎用インクルード関数（sidebar/footer）
+      document.querySelectorAll("[data-include]").forEach(async (el) => {
+        const file = el.getAttribute("data-include");
+        try {
+          const response = await fetch(file);
+          if (!response.ok) throw new Error(response.statusText);
+          // sidebar.html の <aside> が含まれている場合は中身のみ差し込む
+          const text = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+          const fetchedAside = doc.querySelector("aside");
+          if (fetchedAside) {
+            const frag = document.createDocumentFragment();
+            Array.from(fetchedAside.childNodes).forEach(n => frag.appendChild(n.cloneNode(true)));
+            el.replaceWith(frag);
+            return;
+          }
+          el.innerHTML = text;
+        } catch (e) {
+          el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
+          console.error(e);
+        }
+      });
+    </script>
+</body>
+</html>

@@ -240,7 +240,10 @@
     </section>
 
       <!-- サイドバー -->
-      <div data-include="sidebar.html"></div>
+    <!-- サイドバー -->
+      <aside class="space-y-6">
+        <div data-include="sidebar.html"></div>
+      </aside>
     </main>
 
     <!-- フッター -->
@@ -260,13 +263,43 @@
     </script>
 
     <script>
-      // 汎用インクルード関数
+      // 安全なインクルード（sidebar の <aside> をそのまま差し込まず中身だけ挿入）
       document.querySelectorAll("[data-include]").forEach(async (el) => {
         const file = el.getAttribute("data-include");
         try {
-          const response = await fetch(file);
-          if (!response.ok) throw new Error(response.statusText);
-          el.innerHTML = await response.text();
+          const resp = await fetch(file);
+          if (!resp.ok) throw new Error(resp.statusText);
+          const text = await resp.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+
+          // running/sidebar.html を読み込む時は <aside> の中身だけを差し込む
+          if (file.endsWith("sidebar.html")) {
+            const fetchedAside = doc.querySelector("aside") || doc.body;
+            // リンク書換処理（index.html から呼ばれたときの running/ 調整）
+            fetchedAside.querySelectorAll("a").forEach((a) => {
+              let href = a.getAttribute("href") || "";
+              const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
+              if (/^(\.\.\/)+mac\//.test(href)) {
+                href = href.replace(/^(\.\.\/)+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+              if (/^\.\/mac\//.test(href)) {
+                href = href.replace(/^\.\/+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+            });
+            // 中身だけを挿入
+            const frag = document.createDocumentFragment();
+            Array.from(fetchedAside.childNodes).forEach((n) => frag.appendChild(n.cloneNode(true)));
+            el.replaceWith(frag);
+            return;
+          }
+
+          // それ以外はそのまま差し込む
+          el.innerHTML = text;
         } catch (e) {
           el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
           console.error(e);
