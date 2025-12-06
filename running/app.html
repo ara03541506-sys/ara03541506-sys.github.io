@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5788743486732787"
+      crossorigin="anonymous"
+    ></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ランニング計算アプリ一覧</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .card-image { height: 10rem; object-fit: cover; width: 100%; }
+      .card { transition: transform .18s ease, box-shadow .18s ease; }
+      .card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+
+  <body class="min-h-screen bg-white text-gray-800">
+    <!-- ヘッダー -->
+    <header
+      class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-8 shadow-md text-center"
+    >
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+        ランニング計算アプリ一覧
+      </h1>
+
+      <a
+        href="../index.html"
+        class="inline-flex mt-5 px-5 py-2 bg-white text-orange-600 font-semibold rounded-xl shadow hover:bg-orange-100 border border-orange-300 transition-all items-center gap-2"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+        トップに戻る
+      </a>
+    </header>
+
+    <!-- メイン -->
+    <main class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- アプリカード一覧 -->
+      <section class="md:col-span-2">
+        <h2 class="text-xl font-semibold mb-4">アプリ一覧</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <!-- アプリ①：ペース計算アプリ（今回作ったもの） -->
+          <a
+            href="runningcalculation.html"
+            class="card block bg-white rounded-2xl shadow-sm overflow-hidden"
+          >
+            <!-- <img src="画像/app_pace.jpg" class="card-image" /> -->
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-orange-600 hover:underline">
+                ペース計算アプリ
+              </h3>
+              <p class="text-sm text-gray-600 mt-1">
+                3000mSC対応の距離とラップ計算アプリ
+              </p>
+            </div>
+          </a>
+
+          <!-- アプリ②：VDOT計算（仮）
+          <a
+            href="apps/vdot_calc.html"
+            class="card block bg-white rounded-2xl shadow-sm overflow-hidden"
+          >
+            <img src="画像/app_vdot.jpg" class="card-image" />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-orange-600 hover:underline">
+                VDOT 計算アプリ（予定）
+              </h3>
+              <p class="text-sm text-gray-600 mt-1">
+                レースタイムからトレーニングペースを算出
+              </p>
+            </div>
+          </a>
+ -->
+          <!-- アプリ③：目標タイム逆算（仮） -->
+          <!-- <a
+            href="apps/goal_time.html"
+            class="card block bg-white rounded-2xl shadow-sm overflow-hidden"
+          >
+            <img src="画像/app_goal.jpg" class="card-image" />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-orange-600 hover:underline">
+                目標タイム逆算アプリ（予定）
+              </h3>
+              <p class="text-sm text-gray-600 mt-1">
+                目標タイムに必要なペースを自動計算
+              </p>
+            </div>
+          </a> -->
+
+          <!-- アプリ④：ランニングフォーム診断（例） -->
+          <!-- <a
+            href="apps/form_check.html"
+            class="card block bg-white rounded-2xl shadow-sm overflow-hidden"
+          >
+            <img src="画像/app_running.jpg" class="card-image" />
+            <div class="p-4">
+              <h3 class="text-lg font-bold text-orange-600 hover:underline">
+                ランニングフォーム診断（予定）
+              </h3>
+              <p class="text-sm text-gray-600 mt-1">
+                動画から基本姿勢や課題を抽出（AI）
+              </p>
+            </div>
+          </a>
+ -->
+        </div>
+      </section>
+
+      <!-- サイドバー -->
+      <aside class="md:col-span-1 space-y-6">
+        <div data-include="sidebar.html"></div>
+      </aside>
+    </div>
+    </main>
+
+    <!-- フッター -->
+    <div data-include="footer.html"></div>
+
+
+    <!-- 既存ブログの include 処理をそのままコピー -->
+    <script>
+      document.querySelectorAll("[data-include]").forEach(async (el) => {
+        const file = el.getAttribute("data-include");
+        try {
+          const resp = await fetch(file);
+          if (!resp.ok) throw new Error(resp.statusText);
+          const text = await resp.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+
+          if (file.endsWith("running/sidebar.html")) {
+            const fetchedAside = doc.querySelector("aside") || doc.body;
+            fetchedAside.querySelectorAll("a").forEach((a) => {
+              let href = a.getAttribute("href") || "";
+              const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
+
+              if (/^(\.\.\/)+mac\//.test(href)) {
+                href = href.replace(/^(\.\.\/)+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+              if (/^\.\/mac\//.test(href)) {
+                href = href.replace(/^\.\/+/, "");
+                a.setAttribute("href", href);
+                return;
+              }
+              if (href && !skipPattern.test(href) && !href.startsWith("mac/")) {
+                a.setAttribute("href", "running/" + href);
+              }
+            });
+
+            const frag = document.createDocumentFragment();
+            Array.from(fetchedAside.childNodes).forEach((n) =>
+              frag.appendChild(n.cloneNode(true))
+            );
+            el.replaceWith(frag);
+            return;
+          }
+
+          el.innerHTML = text;
+        } catch (e) {
+          el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
+        }
+      });
+    </script>
+  </body>
+</html>
