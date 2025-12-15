@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>献立ランダムルーレット</title>
+  <style>
+    :root {
+      --bg: #f0f6ff;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-soft: #e0edff;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --border: #dbeafe;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px 16px 32px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 22px;
+      margin: 16px 0 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+
+    .roulette-card {
+      padding: 20px;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    textarea { resize: none; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    .spin-btn {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: #f8fbff;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .menu-text {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .menu-text strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+.delete-btn {
+  width: 50px;
+
+  /* これが超重要 */
+  flex: 0 0 auto;
+  padding: 0;
+
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+  font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+    .result {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #e0edff, #f0f6ff);
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .result h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .result p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🍽 献立ルーレット</h1>
+
+    <div class="card roulette-card">
+      <div class="field">
+        <label>献立</label>
+        <input id="dishInput" placeholder="例：カレー" />
+      </div>
+      <div class="field">
+        <label>材料</label>
+        <textarea id="ingredientInput" rows="3" placeholder="じゃがいも、にんじん、肉"></textarea>
+      </div>
+      <div class="actions">
+        <button class="save-btn" onclick="saveMenu()">保存</button>
+        <button class="spin-btn" onclick="spinRoulette()">回す</button>
+      </div>
+
+      <h3 style="margin-top:24px">保存済み献立</h3>
+      <ul id="menuList"></ul>
+
+      <div id="result" class="result">今日の献立は？</div>
+    </div>
+
+    <!-- 統合カードここまで -->
+
+    <div style="display:none">
+      <h3>保存済み献立</h3>
+      <ul id="menuList"></ul>
+      <div id="result" class="result">今日の献立は？</div>
+    </div>
+
+  <script>
+    const STORAGE_KEY = 'menus';
+
+    function getSavedMenus() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    }
+
+    function saveMenu() {
+      const dish = document.getElementById('dishInput').value.trim();
+      const ingredients = document.getElementById('ingredientInput').value.trim();
+      if (!dish || !ingredients) return;
+
+      const menus = getSavedMenus();
+      menus.push({ dish, ingredients });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(menus));
+
+      document.getElementById('dishInput').value = '';
+      document.getElementById('ingredientInput').value = '';
+      renderMenuList();
+    }
+
+    function renderMenuList() {
+      const menuList = document.getElementById('menuList');
+      const menus = getSavedMenus();
+      menuList.innerHTML = '';
+
+      menus.forEach((menu, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="menu-text">
+            <strong>${menu.dish}</strong>
+            材料：${menu.ingredients}
+          </div>
+          <button class="delete-btn" onclick="deleteMenu(${index})">×</button>
+        `;
+        menuList.appendChild(li);
+      });
+    }
+
+    function deleteMenu(index) {
+      const menus = getSavedMenus();
+      menus.splice(index, 1);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(menus));
+      renderMenuList();
+    }
+
+    function spinRoulette() {
+      const menus = getSavedMenus();
+      const resultDiv = document.getElementById('result');
+
+      if (menus.length === 0) {
+        resultDiv.textContent = '献立を保存してください';
+        return;
+      }
+
+      const menu = menus[Math.floor(Math.random() * menus.length)];
+      resultDiv.innerHTML = `<h2>🍽 ${menu.dish}</h2><p>材料：${menu.ingredients}</p>`;
+    }
+
+    renderMenuList();
+  </script>
+</body>
+</html>
