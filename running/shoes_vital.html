@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>シューズ寿命管理</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN",Meiryo, sans-serif;margin:16px;background:#f7fafc;color:#111}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  h1{font-size:1.3rem;margin:0}
+  .card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.08);padding:12px;margin-bottom:12px}
+  label{display:block;margin:6px 0 3px;font-size:0.9rem}
+  input[type="text"], input[type="number"], input[type="date"], select{width:100%;padding:8px;border:1px solid #ddd;border-radius:6px}
+  button{padding:8px 10px;border-radius:6px;border:0;background:#2b6cb0;color:#fff;cursor:pointer}
+  button.ghost{background:#e2e8f0;color:#111}
+  .grid{display:grid;grid-template-columns:1fr 320px;gap:12px}
+  @media(max-width:880px){.grid{grid-template-columns:1fr}}
+  .shoe-list{display:flex;flex-direction:column;gap:10px}
+  .shoe-item{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;border:1px solid #eee}
+  .meta{flex:1}
+  .meta h3{margin:0 0 6px;font-size:1rem}
+  .small{font-size:0.85rem;color:#555}
+  .progress{height:10px;background:#e6eef8;border-radius:999px;overflow:hidden;margin-top:6px}
+  .bar{height:100%;background:#2b6cb0;width:0%}
+  .controls button{margin-right:6px}
+  .log{font-size:0.9rem;border-top:1px dashed #eee;padding-top:8px;margin-top:8px}
+  .flex{display:flex;gap:8px;align-items:center}
+  .right{justify-content:flex-end}
+  textarea{width:100%;min-height:80px}
+  .muted{color:#666;font-size:0.85rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>シューズ寿命管理</h1>
+  <div class="muted">（ローカル保存）</div>
+</header>
+
+<div class="grid">
+  <!-- 左：シューズ一覧 -->
+  <div>
+    <div class="card">
+      <h2 style="margin-top:0;font-size:1.05rem">シューズ登録</h2>
+      <label>名前</label>
+      <input id="shoeName" type="text" placeholder="例: Nike Pegasus 38"/>
+      <label>購入日</label>
+      <input id="shoeDate" type="date" />
+      <label>期待寿命（km）</label>
+      <input id="shoeLifespan" type="number" min="1" value="500" />
+      <div style="margin-top:8px" class="flex">
+        <button id="addShoeBtn">登録</button>
+        <button id="exportBtn" class="ghost">JSONエクスポート</button>
+        <button id="importBtn" class="ghost">JSONインポート</button>
+      </div>
+    </div>
+
+    <div id="shoesContainer" class="shoe-list"></div>
+  </div>
+
+  <!-- 右：選択シューズとログ記入 -->
+  <aside>
+    <div id="selectedCard" class="card">
+      <h2 style="margin-top:0" id="selTitle">シューズを選択してください</h2>
+      <div id="selBody" style="display:none">
+        <div class="small">名前: <span id="selName"></span></div>
+        <div class="small">購入日: <span id="selDate"></span></div>
+        <div class="small">期待寿命: <span id="selLife"></span> km</div>
+        <div class="small">累計距離: <strong id="selTotal">0</strong> km</div>
+        <div class="progress"><div id="selBar" class="bar"></div></div>
+
+        <div style="margin-top:10px">
+          <label>今日の走行距離（km）を追加</label>
+          <input id="runDist" type="number" min="0.01" step="0.01" placeholder="例: 5.2" />
+          <div style="margin-top:8px" class="flex">
+            <button id="addRunBtn">追加</button>
+            <button id="editShoeBtn" class="ghost">編集</button>
+            <button id="deleteShoeBtn" class="ghost">削除</button>
+          </div>
+        </div>
+
+        <div class="log" id="logArea">
+          <h3 style="margin:6px 0 4px">走行ログ</h3>
+          <div id="logsList" class="muted">ログがありません</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">使い方メモ</h3>
+      <ul style="margin:6px 0 0;padding-left:18px">
+        <li>期待寿命は任意（例: 400〜800km）。設定に応じて残り％を表示します。</li>
+        <li>エクスポートでバックアップ、インポートで復元できます。</li>
+        <li>このデータはブラウザの localStorage にのみ保存されます。</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- Import modal -->
+<div id="importModal" style="display:none;position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:16px;border-radius:8px;max-width:600px;width:94%;">
+    <h3>JSONインポート</h3>
+    <div class="muted">エクスポートしたJSONを貼り付けてください（上書きされます）</div>
+    <textarea id="importArea"></textarea>
+    <div style="margin-top:8px" class="flex right">
+      <button id="doImport" class="ghost">キャンセル</button>
+      <button id="confirmImport">インポート</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* データ構造:
+  shoes = [
+    {
+      id: 'uuid',
+      name: 'Nike',
+      date: '2024-01-10',
+      lifespan: 500, // expectation km
+      total: 123.4, // 累計km
+      logs: [{date:'2025-12-09T13:00:00', dist:5.2, note:''}, ...]
+    }, ...
+  ]
+*/
+const LS_KEY = 'shoes_lifecycle_v1';
+let shoes = [];
+let selectedId = null;
+
+// util
+function save() {
+  localStorage.setItem(LS_KEY, JSON.stringify(shoes));
+  renderList();
+  renderSelected();
+}
+function load() {
+  const raw = localStorage.getItem(LS_KEY);
+  if (!raw) return;
+  try {
+    shoes = JSON.parse(raw) || [];
+  } catch(e) { shoes = []; }
+}
+function uid() { return 's'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8); }
+function find(id){ return shoes.find(s=>s.id===id); }
+function formatDate(d){ if(!d) return ''; const t = new Date(d); if(isNaN(t)) return d; return t.toISOString().slice(0,10); }
+
+// init
+load();
+document.addEventListener('DOMContentLoaded', ()=> {
+  // elements
+  const addShoeBtn = document.getElementById('addShoeBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const addRunBtn = document.getElementById('addRunBtn');
+  const editShoeBtn = document.getElementById('editShoeBtn');
+  const deleteShoeBtn = document.getElementById('deleteShoeBtn');
+
+  addShoeBtn.addEventListener('click', ()=> {
+    const name = document.getElementById('shoeName').value.trim();
+    const date = document.getElementById('shoeDate').value || '';
+    const lifespan = Number(document.getElementById('shoeLifespan').value) || 500;
+    if(!name){ alert('名前を入力してください'); return; }
+    const s = { id: uid(), name, date, lifespan, total: 0, logs: [] };
+    shoes.push(s);
+    save();
+    // clear inputs
+    document.getElementById('shoeName').value = '';
+    document.getElementById('shoeDate').value = '';
+    document.getElementById('shoeLifespan').value = 500;
+    selectedId = s.id;
+    renderSelected();
+  });
+
+  exportBtn.addEventListener('click', ()=> {
+    const blob = new Blob([JSON.stringify(shoes, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'shoes-backup.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  importBtn.addEventListener('click', ()=> {
+    document.getElementById('importModal').style.display = 'flex';
+    document.getElementById('importArea').value = '';
+  });
+
+  document.getElementById('doImport').addEventListener('click', ()=> {
+    document.getElementById('importModal').style.display = 'none';
+  });
+
+  document.getElementById('confirmImport').addEventListener('click', ()=> {
+    const txt = document.getElementById('importArea').value.trim();
+    if(!txt) { alert('JSONを貼り付けてください'); return; }
+    try {
+      const arr = JSON.parse(txt);
+      if(!Array.isArray(arr)) throw new Error('配列ではありません');
+      // 簡易検証
+      for(const s of arr){
+        if(!s.id) s.id = uid();
+        if(!s.name) s.name = 'Unnamed';
+        s.lifespan = Number(s.lifespan)||500;
+        s.total = Number(s.total)||0;
+        s.logs = Array.isArray(s.logs)?s.logs: [];
+      }
+      shoes = arr;
+      selectedId = shoes.length?shoes[0].id:null;
+      save();
+      document.getElementById('importModal').style.display = 'none';
+      alert('インポート完了');
+    } catch(e){
+      alert('JSONパースエラー: '+e.message);
+    }
+  });
+
+  addRunBtn.addEventListener('click', ()=> {
+    if(!selectedId){ alert('シューズを選択してください'); return; }
+    const v = Number(document.getElementById('runDist').value);
+    if(!v || v<=0){ alert('正しい距離を入力してください'); return; }
+    const s = find(selectedId);
+    s.total = Number((s.total + v).toFixed(2));
+    s.logs.unshift({ date: new Date().toISOString(), dist: v });
+    save();
+    document.getElementById('runDist').value = '';
+  });
+
+  editShoeBtn.addEventListener('click', ()=> {
+    if(!selectedId) return;
+    const s = find(selectedId);
+    const newName = prompt('名前を編集', s.name);
+    if(newName === null) return;
+    const newL = prompt('期待寿命をkmで入力', s.lifespan);
+    if(newL === null) return;
+    s.name = (newName+'').trim() || s.name;
+    s.lifespan = Number(newL) || s.lifespan;
+    save();
+  });
+
+  deleteShoeBtn.addEventListener('click', ()=> {
+    if(!selectedId) return;
+    if(!confirm('このシューズを削除しますか？（復元できません）')) return;
+    shoes = shoes.filter(x=>x.id!==selectedId);
+    selectedId = shoes.length?shoes[0].id:null;
+    save();
+  });
+
+  renderList();
+  renderSelected();
+});
+
+function renderList(){
+  const container = document.getElementById('shoesContainer');
+  container.innerHTML = '';
+  if(shoes.length === 0){
+    container.innerHTML = '<div class="muted">登録されたシューズはありません</div>';
+    return;
+  }
+  shoes.forEach(s=>{
+    const usedPct = Math.min(100, Math.round((s.total / s.lifespan) * 100));
+    const item = document.createElement('div');
+    item.className = 'shoe-item';
+    item.innerHTML = `
+      <div class="meta">
+        <h3>${escapeHtml(s.name)}</h3>
+        <div class="small">累計: <strong>${s.total}</strong> km ・ 期待寿命: ${s.lifespan} km</div>
+        <div class="progress"><div class="bar" style="width:${usedPct}%"></div></div>
+      </div>
+      <div class="controls">
+        <div style="font-size:0.85rem;text-align:right">${usedPct}%</div>
+        <div style="margin-top:8px" class="flex">
+          <button class="selectBtn ghost">選択</button>
+        </div>
+      </div>
+    `;
+    item.querySelector('.selectBtn').addEventListener('click', ()=>{
+      selectedId = s.id;
+      renderSelected();
+      // scroll into view
+      item.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+    container.appendChild(item);
+  });
+}
+
+function renderSelected(){
+  const selTitle = document.getElementById('selTitle');
+  const selBody = document.getElementById('selBody');
+  if(!selectedId){ selTitle.textContent = 'シューズを選択してください'; selBody.style.display = 'none'; return; }
+  const s = find(selectedId);
+  if(!s){ selectedId = null; return renderSelected(); }
+  selTitle.textContent = s.name;
+  selBody.style.display = 'block';
+  document.getElementById('selName').textContent = s.name;
+  document.getElementById('selDate').textContent = formatDate(s.date) || '-';
+  document.getElementById('selLife').textContent = s.lifespan;
+  document.getElementById('selTotal').textContent = s.total.toFixed(2);
+  const pct = Math.min(100, Math.round((s.total / s.lifespan) * 100));
+  const bar = document.getElementById('selBar');
+  bar.style.width = pct + '%';
+  // color change when > 100%
+  bar.style.background = pct >= 100 ? '#e53e3e' : '#2b6cb0';
+
+  // logs
+  const logsList = document.getElementById('logsList');
+  if(!s.logs || s.logs.length === 0){
+    logsList.innerHTML = '<div class="muted">ログがありません</div>';
+  } else {
+    logsList.innerHTML = '';
+    const ul = document.createElement('div');
+    s.logs.slice(0,20).forEach(l=>{
+      const d = new Date(l.date);
+      const el = document.createElement('div');
+      el.style.marginBottom = '6px';
+      el.innerHTML = `<div style="font-weight:600">${d.toLocaleDateString()} ${d.toLocaleTimeString()}</div>
+                      <div class="small">距離: ${Number(l.dist).toFixed(2)} km</div>`;
+      ul.appendChild(el);
+    });
+    logsList.appendChild(ul);
+  }
+}
+
+// small helper to avoid XSS in names
+function escapeHtml(str){ return (str+'').replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+</script>
+</body>
+</html>
