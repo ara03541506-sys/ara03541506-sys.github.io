@@ -63,10 +63,10 @@
   <!-- ▲▲▲ カテゴリフィルターUIここまで ▲▲▲ -->
 
   <main class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-    <section class="md:col-span-2">
-      <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-<!-- 記事はここから -->
+  <section class="md:col-span-2">
+    <!-- grid-cols-1 sm:grid-cols-2 → grid-cols-1 xs:grid-cols-2 -->
+    <div id="cards-grid" class="grid grid-cols-2 gap-6">
+      <!-- 記事はここから -->
 
 <a href="adidas_evosl.html" class="card block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white" data-category="Adidas" data-order="5">
   <img src="../images/evosl.png" alt="adidas evosl" class="card-image" />
@@ -165,12 +165,12 @@
 </a>
 <!-- 記事はここまで -->
 
-      </div>
-    </section>
-    <aside class="md:col-span-1 space-y-6">
-      <div data-include="sidebar.html"></div>
-    </aside>
-  </main>
+    </div>
+  </section>
+  <aside class="md:col-span-1 space-y-6">
+    <div data-include="sidebar.html"></div>
+  </aside>
+</main>
 
     <!-- フッター -->
     <div data-include="footer.html"></div>
