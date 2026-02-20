@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+  <section class="md:col-span-2 prose prose-lg leading-relaxed max-w-none mt-10
+  [&>ul]:list-disc
+  [&>ul]:pl-6
+  [&>ul>li]:mb-2
+  [&>p]:mb-8">
+  {% if page.image %}
+  <img src="{{ page.image | relative_url }}"
+       alt="{{ page.title }}"
+       class="rounded-2xl mb-8 w-full object-cover">
+{% endif %}
+
+    {{ content }}
+  </section>
+
+  <aside>
+    {% include sidebar.html %}
+  </aside>
+
+</main>

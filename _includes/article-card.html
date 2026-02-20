@@ -1,0 +1,23 @@
+<div class="not-prose w-full max-w-none rounded-2xl shadow border border-gray-200 bg-white flex items-center gap-6 p-6 hover:shadow-lg transition">
+
+  <!-- サムネイル -->
+  <a href="{{ include.url }}" class="flex-shrink-0">
+    <img src="{{ include.image | relative_url }}"
+
+         alt="{{ include.title }}" 
+         class="w-32 h-32 object-contain">
+  </a>
+
+  <!-- テキスト -->
+  <div class="flex-1 min-w-0">
+    <a href="{{ include.url }}" class="group block">
+      <h3 class="font-bold text-lg text-blue-700 group-hover:underline">
+        {{ include.title }}
+      </h3>
+      <p class="text-sm text-gray-600 mt-2">
+        {{ include.description }}
+      </p>
+    </a>
+  </div>
+
+</div>

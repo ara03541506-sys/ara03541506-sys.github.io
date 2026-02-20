@@ -1,0 +1,87 @@
+---
+layout: default
+title: カテゴリー：ランニングシューズ
+description: ランニングシューズレビュー記事の一覧ページ。
+permalink: /category_shoes.html
+---
+
+<section class="max-w-6xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-8 text-center">シューズ一覧</h1>
+
+  <div class="mb-6">
+    <p class="text-sm text-gray-600 mb-3">メーカーで絞り込み</p>
+    <div id="brand-filters" class="flex flex-wrap gap-2">
+      <button type="button" data-brand="all" class="brand-filter px-3 py-1.5 rounded-full border border-orange-500 bg-orange-500 text-white text-sm">すべて</button>
+      <button type="button" data-brand="adidas" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">adidas</button>
+      <button type="button" data-brand="nike" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">NIKE</button>
+      <button type="button" data-brand="puma" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">PUMA</button>
+      <button type="button" data-brand="asics" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">ASICS</button>
+      <button type="button" data-brand="brooks" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">BROOKS</button>
+      <button type="button" data-brand="new-balance" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">NB</button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <section class="md:col-span-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {% for post in site.categories.shoes %}
+          {% assign filename = post.path | split:'/' | last | remove:'.md' | downcase %}
+          {% assign parts = filename | split:'-' %}
+          {% assign brand = parts[3] | default: 'other' %}
+          {% if brand == 'nb' %}
+            {% assign brand = 'new-balance' %}
+          {% endif %}
+          <a href="{{ post.url | relative_url }}"
+             data-brand="{{ brand }}"
+             class="shoe-card block rounded-2xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
+            <img src="{{ post.image | relative_url }}"
+                 class="w-full h-48 object-cover bg-gray-100"
+                 alt="{{ post.title }}">
+            <div class="p-4">
+              <p class="text-xs text-gray-500">{{ post.date | date: "%Y-%m-%d" }}</p>
+              <h2 class="text-lg font-bold text-orange-600 mt-1">{{ post.title }}</h2>
+              <p class="text-sm text-gray-600 mt-2">{{ post.description }}</p>
+            </div>
+          </a>
+        {% else %}
+          <p class="col-span-full text-sm text-gray-500">シューズカテゴリの記事はまだありません。</p>
+        {% endfor %}
+      </div>
+      <p id="no-results" class="hidden mt-4 text-sm text-gray-500">該当するメーカーの記事はありません。</p>
+    </section>
+
+    <aside class="md:col-span-1 space-y-6">
+      {% include sidebar.html %}
+    </aside>
+  </div>
+
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll('.brand-filter');
+      const cards = document.querySelectorAll('.shoe-card');
+      const noResults = document.getElementById('no-results');
+
+      function applyFilter(brand) {
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const hit = brand === 'all' || card.dataset.brand === brand;
+          card.classList.toggle('hidden', !hit);
+          if (hit) visibleCount += 1;
+        });
+        noResults.classList.toggle('hidden', visibleCount > 0);
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          buttons.forEach((b) => {
+            b.classList.remove('border-orange-500', 'bg-orange-500', 'text-white');
+            b.classList.add('border-gray-300', 'bg-white', 'text-gray-700');
+          });
+          btn.classList.remove('border-gray-300', 'bg-white', 'text-gray-700');
+          btn.classList.add('border-orange-500', 'bg-orange-500', 'text-white');
+          applyFilter(btn.dataset.brand);
+        });
+      });
+    })();
+  </script>
+</section>

@@ -1,255 +1,46 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-<link rel="icon" type="image/png" href="/images/favicon.png">
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5788743486732787"
-      crossorigin="anonymous"
-    ></script>
-    <meta name="google-adsense-account" content="ca-pub-5788743486732787">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>市民ランナーの長距離ブログ</title>
-    <meta name="description" content="市民ランナーが練習日誌、ランニングシューズの実走レビュー、マラソン大会の記録を発信。PBフル2:21:41・ハーフ1:04:27。" />
+---
+layout: default
+title: 市民ランナーの長距離ブログ
+description: 市民ランナーが練習日誌、ランニングシューズの実走レビュー、マラソン大会の記録を発信。PBフル2:21:41・ハーフ1:04:27。
+---
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* 画像の高さを制限して比率を保つ（カード内画像の崩れ対策） */
-    .card-image { height: 10rem; object-fit: cover; width: 100%; display:block; }
-    /* カード全体の微調整 */
-    .card { transition: transform .18s ease, box-shadow .18s ease; }
-    .card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 30px rgba(16,24,40,0.08); }
-  </style>
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <!-- Google tag (gtag.js) をhead内の最後に追加 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8GYTESRQV4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      gtag('config', 'G-8GYTESRQV4');
-    </script>
-  </head>
-  <body class="min-h-screen bg-white text-gray-800">
-    <!-- ヘッダー -->
-    <header
-      class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-8 shadow-md text-center"
-    >
-      <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
-        市民ランナーの長距離ブログ
-      </h1>
-      <a
-        href="index.html"
-        class="inline-flex mt-5 px-5 py-2 bg-white text-orange-600 font-semibold rounded-xl shadow hover:bg-orange-100 border border-orange-300 transition-all items-center gap-2"
-      >
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>トップに戻る</span>
-      </a>
-      <p class="text-sm mt-1"></p>
-    </header>
+    <section class="md:col-span-2">
+      <h2 class="text-xl font-semibold mb-6">最新記事</h2>
 
-    <!-- メインコンテンツ -->
-    <main class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- 最新記事セクション -->
-      <section class="md:col-span-2">
-        <h2 class="text-xl font-semibold mb-4">最新記事</h2>
-            <div class="grid gap-4">
-              <!-- サンプル記事カード -->
-              <a
-                href="running/nb_fuelcellv5.html"
-                class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
-              >
-                <img
-                  src="images/nbv5.JPG"
-                  class="w-full h-64 object-cover"
-                />
-                <div class="p-4">
-                  <h3 class="text-lg font-bold text-orange-600 hover:underline">
-                    NB FuelCell SuperComp Elite v5
-                  </h3>
-                  <p class="text-sm text-gray-600 mt-1">
-                    NBの厚底シューズ!
-                  </p>
-                </div>
-              </a>
-            </div>
-          <div class="grid gap-4">
-            <!-- サンプル記事カード -->
-            <a
-              href="running/marathon_ibusuki.html"
-              class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
-            >
-              <img
-                src="images/nanohana.JPG"
-                class="w-full h-64 object-cover"
-              />
-              <div class="p-4">
-                <h3 class="text-lg font-bold text-orange-600 hover:underline">
-                  いぶすき菜の花マラソン2026
-                </h3>
-                <p class="text-sm text-gray-600 mt-1">
-                  2:25:43 2位!
-                </p>
-              </div>
-            </a>
-
-          </div>
-
-
-        <div class="grid gap-4">
-          <!-- サンプル記事カード -->
-                    <a
-            href="running/adidas_evosl.html"
-            class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
-          >
-            <img
-              src="images/evosl.png"
-              class="w-full h-64 object-cover"
-            />
+      <div class="grid gap-6">
+        {% for post in site.posts limit: 4 %}
+          <a href="{{ post.url | relative_url }}"
+             class="block rounded-2xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
+            <img src="{{ post.image | default: '/images/favicon.png' | relative_url }}"
+                 class="w-full h-64 object-cover"
+                 alt="{{ post.title }}">
             <div class="p-4">
-              <h3 class="text-lg font-bold text-orange-600 hover:underline">
-                adidas EVOSL レビュー
-              </h3>
-              <p class="text-sm text-gray-600 mt-1">
-                ノンカーボンの万能シューズ！
-              </p>
+              <p class="text-xs text-gray-500">{{ post.date | date: "%Y-%m-%d" }}</p>
+              <h3 class="text-lg font-bold text-orange-600 mt-1">{{ post.title }}</h3>
+              <p class="text-sm text-gray-600 mt-1">{{ post.description }}</p>
             </div>
           </a>
+        {% else %}
+          <p class="text-sm text-gray-500">記事がまだありません。</p>
+        {% endfor %}
+      </div>
+    </section>
 
-          <a
-            href="running/nike_dragonelite.html"
-            class="block cursor-pointer transition-transform hover:scale-105 rounded-2xl shadow-sm overflow-hidden bg-white"
-          >
-            <img
-              src="images/doragonelite.jpg"
-              class="w-full h-64 object-cover"
-            />
-            <div class="p-4">
-              <h3 class="text-lg font-bold text-orange-600 hover:underline">
-                NIKE ドラゴンフライエリート レビュー
-              </h3>
-              <p class="text-sm text-gray-600 mt-1">
-                反発が強くなりアップデート！
-              </p>
-            </div>
-          </a>
+    <aside class="space-y-6">
+      {% include sidebar.html %}
+    </aside>
 
-        </div>
-      </section>
+  </div>
+</div>
 
-      <!-- サイドバー -->
-       <aside class="space-y-6">
-      <div data-include="running/sidebar.html"></div>
-      </aside>
-
-      <!-- Google向け記事一覧（非表示でもOK） -->
 <section class="sr-only">
   <h2>記事一覧</h2>
   <ul>
-    <li>
-      <strong>ランニングシューズ</strong>
-      <ul>
-        <li><a href="running/nb_fuelcellv5.html">NB FuelCell SuperComp Elite v5</a></li>
-        <li><a href="running/adidas_evosl.html">adidas EVOSL</a></li>
-        <li><a href="running/nike_dragonelite.html">NIKE ドラゴンフライエリート レビュー</a></li>
-        <li><a href="running/takumi11.html">アディゼロタクミセン11 レビュー</a></li>
-        <li><a href="running/adidas_pro4.html">アディオスプロ4 レビュー</a></li>
-        <li><a href="running/adidas_japan9.html">adidas Japan9レビュー</a></li>
-        <li><a href="running/puma_deviate.html">PUMA ディヴィエイトニトロエリート3 レビュー</a></li>
-        <li><a href="running/brooks_hypeion3.html">ブルックス ハイペリオン3 レビュー</a></li>
-        <li><a href="running/asics_geruninbus.html">ゲルニンバス26レビュー</a></li>
-        <li><a href="running/category_shoes.html">シューズカテゴリ記事一覧</a></li>
-      </ul>
-    </li>
-    <li>
-      <strong>マラソン・大会</strong>
-      <ul>
-        <li><a href="running/marathon_ibusuki.html">いぶすき菜の花マラソン2026</a></li>
-      </ul>
-    </li>
-    <li>
-      <strong>カテゴリ別一覧</strong>
-      <ul>
-        <li><a href="running/category_puma.html">PUMAカテゴリ記事一覧</a></li>
-        <li><a href="running/category_adidas.html">Adidasカテゴリ記事一覧</a></li>
-        <li><a href="running/category_nike.html">NIKEカテゴリ記事一覧</a></li>
-        <li><a href="running/category_theory.html">練習理論カテゴリ記事一覧</a></li>
-      </ul>
-    </li>
+    {% for post in site.posts limit: 20 %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+    {% endfor %}
   </ul>
 </section>
-
-    </main>
-
-    <!-- フッター -->
-    <div data-include="running/footer.html"></div>
-
-    <script>
-      // カードにマウスオーバーでアニメーション
-      document.querySelectorAll(".cursor-pointer").forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-          card.style.transform = "scale(1.05)";
-          card.style.transition = "transform 0.2s";
-        });
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "scale(1)";
-        });
-      });
-    </script>
-
-    <script>
-      // 安全なインクルード（sidebar の <aside> をそのまま差し込まず中身だけ挿入）
-      document.querySelectorAll("[data-include]").forEach(async (el) => {
-        const file = el.getAttribute("data-include");
-        try {
-          const resp = await fetch(file);
-          if (!resp.ok) throw new Error(resp.statusText);
-          const text = await resp.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(text, "text/html");
-
-          // running/sidebar.html を読み込む時は <aside> の中身だけを差し込む
-          if (file.endsWith("running/sidebar.html")) {
-            const fetchedAside = doc.querySelector("aside") || doc.body;
-            // リンク書換処理（index.html から呼ばれたときの running/ 調整）
-            fetchedAside.querySelectorAll("a").forEach((a) => {
-              let href = a.getAttribute("href") || "";
-              const skipPattern = /^(https?:|\/\/|\/|#|mailto:|javascript:|\.\.|running:|running\/)/i;
-              if (/^(\.\.\/)+mac\//.test(href)) {
-                href = href.replace(/^(\.\.\/)+/, "");
-                a.setAttribute("href", href);
-                return;
-              }
-              if (/^\.\/mac\//.test(href)) {
-                href = href.replace(/^\.\/+/, "");
-                a.setAttribute("href", href);
-                return;
-              }
-              if (href && !skipPattern.test(href) && !href.startsWith("mac/")) {
-                a.setAttribute("href", "running/" + href);
-              }
-            });
-            // 中身だけを挿入
-            const frag = document.createDocumentFragment();
-            Array.from(fetchedAside.childNodes).forEach((n) => frag.appendChild(n.cloneNode(true)));
-            el.replaceWith(frag);
-            return;
-          }
-
-          // それ以外はそのまま差し込む
-          el.innerHTML = text;
-        } catch (e) {
-          el.innerHTML = `<p style="color:red;">${file} の読み込みに失敗しました。</p>`;
-          console.error(e);
-        }
-      });
-    </script>
-  </body>
-</html>

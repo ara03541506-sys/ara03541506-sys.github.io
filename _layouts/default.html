@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  {% include head.html %}
+  <style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 0.75rem;
+}
+th {
+  background-color: #f3f4f6;
+  text-align: left;
+}
+
+blockquote {
+  background-color: #f3ede4;
+  border-left: 6px solid #fb923c;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+blockquote p {
+  margin: 0;
+  line-height: 1.9;
+  font-size: 1.05rem;
+}
+
+.prose h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+
+
+
+</style>
+
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-800">
+
+  {% include header.html %}
+
+  {{ content }}
+
+  {% include footer.html %}
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% assign meta_title = page.title | default: site.title %}
+{% assign meta_description = page.description | default: site.description %}
+{% assign canonical_url = page.url | absolute_url %}
+{% assign og_image = page.image | default: '/images/favicon.png' | absolute_url %}
+
+<title>{{ meta_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ meta_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:image" content="{{ og_image }}">
+
+<link rel="icon" type="image/png" href="/images/favicon.png">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
+<!-- Adsense -->
+<script async
+ src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5788743486732787"
+ crossorigin="anonymous"></script>
+
+<meta name="google-adsense-account"
+ content="ca-pub-5788743486732787">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8GYTESRQV4"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8GYTESRQV4');
+</script>
+
+<style>
+.card-image { height: 10rem; object-fit: cover; width: 100%; display:block; }
+.card { transition: transform .18s ease, box-shadow .18s ease; }
+.card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 30px rgba(16,24,40,0.08); }
+</style>

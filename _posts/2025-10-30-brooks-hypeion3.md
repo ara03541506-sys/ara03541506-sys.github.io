@@ -1,0 +1,175 @@
+---
+layout: post
+title: "【BROOKS ハイオペリオン３】"
+description: "硬いソールでスピードも出るシューズ"
+image: /images/hyperion3.webp
+categories: shoes
+permalink: /running/brooks_hypeion3.html
+---
+
+<section class="md:col-span-2 space-y-8">
+
+      <!-- 目次 -->
+      <nav class="p-5 bg-white rounded-2xl border shadow-sm">
+        <h2 class="text-lg font-bold mb-3 flex items-center gap-2 text-gray-800">
+          <i class="fa-solid fa-list text-orange-500"></i> 目次
+        </h2>
+        <ul class="list-disc ml-6 text-blue-700 space-y-1">
+          <li><a href="#official" class="hover:underline">公式の引用</a></li>
+          <li><a href="#spec" class="hover:underline">スペック</a></li>
+          <li><a href="#impression" class="hover:underline">履いた感想</a></li>
+          <li><a href="#size" class="hover:underline">サイズ感と重さ</a></li>
+        </ul>
+      </nav>
+
+      <article class="space-y-10">
+
+        <!-- 公式引用 -->
+        <div id="official" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2">公式の引用</h2>
+
+          <blockquote class="bg-orange-50 border-l-4 border-orange-400 p-5 rounded-xl space-y-3">
+            <p>日々のトレーニングからレース本番まで、軽快な走りをサポートする万能モデル</p>
+            <p>1.爆発的な反発力  
+            窒素注入フォーム「DNA FLASH v2」が、地面を蹴るたびに驚くほどの反発力を発揮。速さとソフトな着地感を両立します。</p>
+            <p>2.進化したクッション性  
+            前作と比較して、ミッドソールを2mm増量。着地時の快適性が向上しました。</p>
+            <p>3.スムーズな走りを叶える形状  
+            重心を自然に前へと導き、軽快な蹴り出しをサポートします。</p>
+            <p>4.通気性＆フィット感抜群のアッパー  
+            2層構造のメッシュ素材でムレにくく、足全体をやさしく包み込む快適なフィット感を実現します。</p>
+            <p>◎おすすめランナー  
+            トレーニングからレースまで1足でこなしたい方。テンポ走やインターバル、ファルトレクを楽しみたい方。フルマラソン3.5時間～4時間を目指したい方のレース用。</p>
+          </blockquote>
+        </div>
+
+        <!-- スペック -->
+        <div id="spec" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2">スペック</h2>
+
+          <div class="overflow-x-auto">
+            <table class="table-auto border-collapse border border-gray-400 w-full max-w-md">
+              <thead>
+                <tr>
+                  <th class="border border-gray-400 px-4 py-2 text-center" colspan="2">
+                    ハイペリオン３<br>
+                    <img src="../images/hyperion3.webp" alt="ハイペリオン３" class="mx-auto mt-2 w-32">
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border px-4 py-2 font-semibold">ミッドソール</td>
+                  <td class="border px-4 py-2">8ｍｍ</td>
+                </tr>
+                <tr>
+                  <td class="border px-4 py-2 font-semibold">重さ</td>
+                  <td class="border px-4 py-2">205g（24cm）</td>
+                </tr>
+                <tr>
+                  <td class="border px-4 py-2 font-semibold">価格</td>
+                  <td class="border px-4 py-2">22000円</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 履いた感想 -->
+        <div id="impression" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2">履いた感想</h2>
+
+          <p>
+            まず思ったのが<strong>フィット感が素晴らしい</strong>ことです。シュータンが靴と一体化しているのと、踵のクッションも相まって足にピッタリ合いずれがありません。
+            次にソールの硬さです。最近の靴は柔らかくクッションが厚いものが流行りです。
+            以下のレビューでも書いたことがありますが、クッションが硬い靴も持つべきだと思います。
+          </p>
+
+          <!-- 以前の記事：カード引用（images大きめ＆バランス調整版） -->
+          <div class="max-w-lg mx-auto rounded-2xl shadow border border-gray-200 bg-white flex items-center gap-6 p-6 hover:shadow-lg transition">
+            <!-- サムネイルimages -->
+            <a href="adidas_japan9.html" rel="noopener noreferrer" class="flex-shrink-0">
+              <img src="../images/japan9.jpg" alt="adidas JAPAN 9" class="w-32 h-32 object-cover rounded-xl border">
+            </a>
+            <!-- テキスト部分 -->
+            <div class="flex-1 min-w-0">
+              <a href="adidas_japan9.html" rel="noopener noreferrer" class="group block">
+                <h3 class="font-bold text-lg text-blue-700 group-hover:underline truncate">
+                  adidas JAPAN 9 レビュー
+                </h3>
+                <p class="text-sm text-gray-600 mt-2">
+                  ジョグシューは薄底も持て！
+                </p>
+              </a>
+            </div>
+          </div>
+
+          <p>
+            このシューズは硬いながらも厚みもあり反発もあるためスピードも出せるしゆっくりのペースでも合います。とはいえ40kmジョグした時は後半疲れました笑
+            柔らかいシューズを求めている人には合いませんが、柔らかいものだけ履いているとアキレス腱が痛くなった経験もあり、<strong>私はソールが硬い靴も履くべき</strong>だと思っています。そんな人にはおすすめです。
+          </p>
+        </div>
+
+        <!-- サイズ感と重さ -->
+        <div id="size" class="space-y-4">
+          <h2 class="text-2xl font-bold border-b pb-2">サイズ感と重さ</h2>
+
+          <p>
+            普段私は24.5cmを履いていますが、今回はレディースの25cmにしました。シュータンが一体となっているため、ピッタリすぎると窮屈に感じる可能性があります。試し履きはした方がいいと思います。
+            重さについては205gと重さはあるように見えますが、履いてみるとあまり感じません。
+          </p>
+        </div>
+<!-- 商品購入リンクカード -->
+<div class="max-w-sm border rounded-2xl shadow-md p-5 bg-white">
+
+  <!-- 商品images -->
+  <img src="https://m.media-amazon.com/images/I/41He7RPgdqL._SL500_.jpg"
+       alt="Brooks BRW4532GRY225"
+       class="rounded-lg mb-4 w-full object-contain">
+
+  <!-- 商品名 -->
+  <h3 class="font-bold text-lg mb-2 text-gray-800">
+    Brooks ハイペリオン３
+  </h3>
+
+  <!-- 商品説明 -->
+  <p class="text-sm text-gray-600 mb-4">
+    Brooksの高性能ランニングモデル。安定感とクッション性を兼ね備えた設計。
+  </p>
+
+  <!-- 購入リンク -->
+  <div class="space-y-2">
+
+    <!-- Amazon -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871589&p_id=170&pc_id=185&pl_id=27060&url=https%3A%2F%2Fwww.amazon.co.jp%2Fdp%2FB0DRF59TY5"
+       class="block text-center px-4 py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+       target="_blank" rel="nofollow noopener">
+       Amazonで見る
+    </a>
+    <img src="https://i.moshimo.com/af/i/impression?a_id=3871589&p_id=170&pc_id=185&pl_id=27060"
+         width="1" height="1" style="display:none;" alt="">
+
+    <!-- 楽天市場 -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871516&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%258F%25E3%2582%25A4%25E3%2583%259A%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%25B3%25EF%25BC%2593%2F"
+   class="block text-center px-4 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+   target="_blank" rel="nofollow noopener">
+   楽天市場で見る
+</a>
+<img src="https://i.moshimo.com/af/i/impression?a_id=3871516&p_id=54&pc_id=54&pl_id=616"
+     width="1" height="1" style="display:none;" alt="">
+
+
+    <!-- Yahoo!ショッピング -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871592&p_id=1225&pc_id=1925&pl_id=18502&url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%3Ffirst%3D1%26tab_ex%3Dcommerce%26fr%3Dshp-prop%26mcr%3D18ec1544a3e5f8450f660c7d04714ef7%26ts%3D1767366902%26sretry%3D1%26p%3D%25E3%2583%258F%25E3%2582%25A4%25E3%2583%259A%25E3%2583%25AA%25E3%2582%25AA%25E3%2583%25B3%25EF%25BC%2593%26sc_i%3Dshopping-pc-web-search-suggest-suggest-kwd-sgstfrom-top--h_srch-kwd%26area%3D13"
+   class="block text-center px-4 py-2 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+   target="_blank" rel="nofollow noopener">
+   Yahoo!ショッピングで見る
+</a>
+<img src="https://i.moshimo.com/af/i/impression?a_id=3871592&p_id=1225&pc_id=1925&pl_id=18502"
+     width="1" height="1" style="display:none;" alt="">
+
+  </div>
+</div>
+
+      </article>
+    </section>

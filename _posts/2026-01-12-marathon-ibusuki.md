@@ -1,0 +1,217 @@
+---
+layout: post
+title: "【いぶすき菜の花マラソン2026備忘録】2:25:43 2位！"
+description: "【いぶすき菜の花マラソン2026備忘録】2:25:43 2位！"
+image: /images/unagi.jpg
+categories: marathon
+permalink: /running/marathon_ibusuki.html
+---
+
+<section class="md:col-span-2 space-y-10">
+
+<h2 class="text-2xl font-bold border-b pb-2">いぶすき菜の花マラソンとは？</h2>
+<p>
+<strong>1年で最も早く開催される</strong>フルマラソン公認コースを使用した市民マラソン大会です。  
+特徴としては<strong>制限時間が8時間ととても長い</strong>ことです。  
+コースはきついですが、<strong>初めてのフルマラソンでまずは完走したい</strong>、という人にはとてもおすすめのマラソン大会です。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">前日〜当日の食事</h2>
+<p>
+前日は <a href="https://unagi-sueyoshi.com/" target="_blank" rel="noopener" class="text-blue-600 underline">うなぎの末よし</a> さんにてうなぎを食べました。  
+普段は1週間前からカーボローデンングとして食事にプラスしてゼリーを飲んだりするのですが、今回はなしで前日の食事と団子などを少し食べた程度でした。  
+当日の朝はおにぎり2個、バナナカステラを朝4時に起き、4時30分頃に食べました。  
+レース3〜4時間前までには食事をしたいと思っているので、今回は若干早めですが移動の関係でこの時間に食べることになりました。
+</p>
+<img src="../images/unagi.jpg" width="300"/>
+
+<h2 class="text-2xl font-bold border-b pb-2">レース前までの流れ</h2>
+<p>
+今回は鹿児島市内に前泊し、当日レンタカーで会場に向かう予定でした。  
+鹿児島から指宿までは大体1時間くらいですが、当日混むと予想され、1時間30分は見積もりだいぶ余裕を持って出発しました。  
+そのため出発は5時で、6時30分に着く想定で行きました。  
+なぜこの時間かというと、マラソン会場が駅から遠く車で行く人も多いと予想し、<strong>駐車場が混むとHPにも記載があった</strong>からです。  
+会場近くの駐車場に停められないとかなり歩く羽目になりますし、初めての参加になるため何時に行けばいいか分からなかったため早めの行動でした。  
+出発すると予想通り鹿児島から向かう車がかなり多かったです。  
+とはいえ、信号が少なく渋滞などは起きず、<strong>1時間ちょっとほどで会場に着くことができました。</strong>  
+駐車場もスタート地点真横の駐車場に停めることができたので、<strong>荷物は預けるのではなく車に置いてそのままスタート地点に行くことにしました。</strong>  
+（車の鍵はポケットに入れて走りました。不安で走りながら何回も確認しました笑）  
+しかもこの<strong>駐車場はトイレもあるため、かなり便利でおすすめです。</strong>  
+そんなこんなで6時過ぎという若干早すぎる時間に到着したため、20分ほど仮眠を取り、ゴール地点の体育館まで1kmほど歩いてプログラムなどを受け取りに行きました。  
+そして2025年と同様今年も雨に強風で、会場でポンチョを配ってくれておりかなり助けられました。  
+周りを散策していたらいい時間になり、7時40分から2kmアップをし、<strong>朝ごはんが早くお腹が空いていたためサウルスの01のゼリーを飲みました。</strong>
+</p>
+<img src="../images/ibusukiyuni.JPG" width="300"/>
+<small>靴下はidaten、ジェルはアミノサウルス</small>
+<!-- 商品購入リンクカード -->
+<div class="max-w-sm border rounded-2xl shadow-md p-5 bg-white">
+
+  <!-- 商品images -->
+  <img src="https://m.media-amazon.com/images/I/41BGjWhbpTL._SL500_.jpg"
+       alt="AMINO SAURUS GEL アミノサウルス ジェル"
+       class="rounded-lg mb-4 mx-auto w-32 object-contain">
+
+  <!-- 商品名 -->
+  <h3 class="font-bold text-lg mb-2 text-gray-800">
+    AMINO SAURUS GEL（アミノサウルス ジェル）
+  </h3>
+
+  <!-- 商品説明 -->
+  <p class="text-sm text-gray-600 mb-4">
+    アルギニン2000mg・シトルリン1000mg配合。クエン酸、マグネシウム、カフェインも含む、レースやポイント練習向けの即効型エナジージェル。
+  </p>
+
+  <!-- 購入リンク -->
+  <div class="space-y-2">
+
+    <!-- Amazon -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871589&p_id=170&pc_id=185&pl_id=27060&url=https%3A%2F%2Fwww.amazon.co.jp%2Fdp%2FB095W73D8R"
+       class="block text-center px-4 py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+       target="_blank" rel="nofollow noopener">
+       Amazonで見る
+    </a>
+
+    <!-- 楽天市場 -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871516&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FAMINO%2520SAURUS%2520GEL%2F"
+       class="block text-center px-4 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+       target="_blank" rel="nofollow noopener">
+       楽天市場で見る
+    </a>
+    <img src="https://i.moshimo.com/af/i/impression?a_id=3871516&p_id=54&pc_id=54&pl_id=27059"
+         width="1" height="1" style="display:none;" alt="">
+
+    <!-- Yahoo!ショッピング -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871592&p_id=1225&pc_id=1925&pl_id=27061&url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%3Fp%3DAMINO%2520SAURUS%2520GEL"
+       class="block text-center px-4 py-2 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+       target="_blank" rel="nofollow noopener">
+       Yahoo!ショッピングで見る
+    </a>
+    <img src="https://i.moshimo.com/af/i/impression?a_id=3871592&p_id=1225&pc_id=1925&pl_id=27061"
+         width="1" height="1" style="display:none;" alt="">
+
+  </div>
+</div>
+
+<!-- 商品購入リンクカード（画像小さめに調整） -->
+<div class="max-w-sm border rounded-2xl shadow-md p-5 bg-white">
+
+  <!-- 商品images（w-32で小さく、中央寄せ） -->
+  <img src="https://m.media-amazon.com/images/I/4193fUtvXiL._SL500_.jpg"
+       alt="IDATEN 5本指ハニカムテーピングソックス ミドル丈"
+       class="rounded-lg mb-4 mx-auto w-32 object-contain">
+
+  <!-- 商品名 -->
+  <h3 class="font-bold text-lg mb-2 text-gray-800">
+    IDATEN 5本指ハニカムテーピングソックス（ミドル丈）
+  </h3>
+
+  <!-- 商品説明 -->
+  <p class="text-sm text-gray-600 mb-4">
+    足裏アーチを支えるハニカム構造と5本指設計で安定感抜群。長距離ランやレースでのズレ・マメ対策に定評のある高機能ランニングソックス。
+  </p>
+
+  <!-- 購入リンク -->
+  <div class="space-y-2">
+
+    <!-- Amazon -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871589&p_id=170&pc_id=185&pl_id=27060&url=https%3A%2F%2Fwww.amazon.co.jp%2Fdp%2FB0CVGR4DX2"
+       class="block text-center px-4 py-2 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+       target="_blank" rel="nofollow noopener">
+       Amazonで見る
+    </a>
+
+    <!-- 楽天市場 -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871516&p_id=54&pc_id=54&pl_id=27059&url=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%5BIDATEN%5D%25205%25E6%259C%25AC%25E6%258C%2587%25E3%2583%258F%25E3%2583%258B%25E3%2582%25AB%25E3%2583%25A0%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25BD%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9%2F"
+       class="block text-center px-4 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
+       target="_blank" rel="nofollow noopener">
+       楽天市場で見る
+    </a>
+    <img src="https://i.moshimo.com/af/i/impression?a_id=3871516&p_id=54&pc_id=54&pl_id=27059"
+         width="1" height="1" style="display:none;" alt="">
+
+    <!-- Yahoo!ショッピング -->
+    <a href="https://af.moshimo.com/af/c/click?a_id=3871592&p_id=1225&pc_id=1925&pl_id=27061&url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%3Fp%3D%5BIDATEN%5D%25205%25E6%259C%25AC%25E6%258C%2587%25E3%2583%258F%25E3%2583%258B%25E3%2582%25AB%25E3%2583%25A0%25E3%2583%2586%25E3%2583%25BC%25E3%2583%2594%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25BD%25E3%2583%2583%25E3%2582%25AF%25E3%2582%25B9"
+       class="block text-center px-4 py-2 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+       target="_blank" rel="nofollow noopener">
+       Yahoo!ショッピングで見る
+    </a>
+    <img src="https://i.moshimo.com/af/i/impression?a_id=3871592&p_id=1225&pc_id=1925&pl_id=27061"
+         width="1" height="1" style="display:none;" alt="">
+
+  </div>
+</div>
+
+<p>
+開会式が8時30分から、整列完了が8時50分で、先頭の方に並びたかったので30分過ぎにスタート地点に行きました。  
+とはいえここでびっくりしたのは、列はタイム順に分けられているのですが<strong>3時間切り目標の列が４列ほどしかありませんでした。</strong>  
+やはりコースがきついため、自己ベストよりはだいぶタイムが遅くなることも予想される大会のため、レベルはとても高いわけではなさそうです。  
+私は念のため早く並びましたが、これだと<strong>ギリギリに並んでも先頭付近でスタートできそうです。</strong>  
+そして開会式では川内優輝さんやM高史さん、瀬古さんなどのお話を聞くことができました。  
+特に瀬古さんの黒田朝日先週への箱根の恨みは会場を沸かしていました。
+</p>
+
+<p>
+そして開会式中は雨がさり晴れ間が見え、暖かく手袋、アームウォーマーいらないじゃん、と思っていたのですが、開会式終了くらいから風が強くなり雨が降ってきました。  
+正直スタート前の10分間は寒すぎてかなり辛かったです。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">スタート〜10km</h2>
+<p>ラップ：18'35-17'49</p>
+<img src="../images/ibusukirapp.jpg" width="300"/>
+<small>総合ラップ</small>
+<p>
+<strong>ペースは3’30前後を想定していました。</strong>  
+ただスタート直後とんでもない暴風雨で、寒いし向かい風もきつく、みんな牽制し3’40の入りになりました。  
+幸い雨は数キロで止み、むしろ晴れてくるという移り変わりの激しい天候でした。  
+ただすぐに上り坂が始まり、5km以降は3’30程度で予定通りくらいのペースに落ち着きました。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">10~20km</h2>
+<p>ラップ：16'57-17'06</p>
+<p>
+ここはアップダウンが繰り返されるコースでした。  
+3’30ペースだと集団は5人ほどいて、少し削ろうと思い下りで3’15~20くらいに上げるなどして若干ペースアップしました。  
+そのおかげもあり集団は一旦3人になり、とりあえず入賞は硬そうなラインにきました。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">20~30km</h2>
+<p>ラップ：16'53-16'47</p>
+<p>
+3人の集団で走っていたはずが、<strong>後ろから見覚えのない選手が走ってきました。</strong>  
+最初ゆっくりすぎたせいで最後尾から追い上げている川内さんが来たかと思ったら別の選手でした。  
+3位以内は硬いと思っていたら思わぬ伏兵でした。  
+<strong>そのまま26kmほどで追いつかれ、ダッシュで抜かれ仕掛けられた、と思い着こうと思った矢先その選手はトイレに駆け込んで行きました。</strong>  
+一瞬戸惑いましたが上げずに元のペースに戻して走りました。  
+その時に同じ集団にいた選手から箱根を走った選手ということを聞き、なるほどなと思いました。  
+トイレに行っても余裕で追いついてくるとのことだったので、ここから3’20くらいで押していくことにしました。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">30~42km</h2>
+<p>ラップ：16'50-17'24-7'19</p>
+<p>
+20km後半から30km前半にかけてはどちらかというと平坦なコースでした。  
+その中のうち<strong>若干登りのあった30km地点でペースを若干上げ後ろとの差も離し単独1位になりました。</strong>  
+普通ならここで1位を確信して安牌に行くのですが、後ろからもう一人追ってくるランナーがいるため変わらず3’20目安で推移しました。  
+そして36kmの最後の大きな上り坂で箱根ランナーに追いつかれ、流石に上げられなかったので先に行ってと言って単独2位になりました。  
+そこから下りだったのでペースは上がりましたが、だいぶ足を使っていたため3’20~30ほどで推移しました。  
+とはいえそこまで前との差が広がらなかったため、一応希望は捨てずに走りました。  
+そして後半でまたもや土砂降りの雨になりました。  
+とはいえなぜか足が動き始めたため、ラスト2kmから3’20を切るペースにペースアップしました。  
+とはいえ30秒くらいあった差を10秒くらいまで詰めたものの抜くことはできず、2位でゴールしました。
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">ゴール後</h2>
+<p>
+ゴール後も変わらず雨風が強く、駐車場に戻るまでが本当に寒くて辛かったです。  
+スタート地点に車が近いのはいいですが、ゴール地点からは1kmほどあるため意外と時間がかかりました。  
+着替えなどを済ませた後は参加賞でうどん、おにぎりを食べました。  
+ぜんざいなどもあったらしいですが気付きませんでした。  
+<strong>参加賞も素晴らしく、応援の人も暖かくとてもいいマラソン大会でした。</strong>  
+翌日珍しく足が筋肉痛になりましたが、<strong>とてもおすすめのマラソンです。</strong>
+</p>
+
+<h2 class="text-2xl font-bold border-b pb-2">余談</h2>
+<p>指宿はイーブイ好きということからイーブイのポケ蓋があります。スタート地点の競技場付近と指宿駅付近に集結しているのでぜひ集めてみてください。</p>
+<img src="../images/ibui.jpg" width="300"/>
+
+</section>

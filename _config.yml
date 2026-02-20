@@ -1,0 +1,8 @@
+theme: null
+title: 市民ランナーの長距離ブログ
+description: 市民ランナーが練習日誌、ランニングシューズの実走レビュー、マラソン大会の記録を発信。
+url: "https://ara03541506-sys.github.io"
+baseurl: ""
+
+plugins:
+  - jekyll-sitemap
