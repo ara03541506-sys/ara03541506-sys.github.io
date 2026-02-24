@@ -5,6 +5,10 @@
 {% assign meta_description = page.description | default: site.description %}
 {% assign canonical_url = page.url | absolute_url %}
 {% assign og_image = page.image | default: '/images/favicon.png' | absolute_url %}
+{% assign page_type = 'WebPage' %}
+{% if page.layout == 'post' %}
+  {% assign page_type = 'BlogPosting' %}
+{% endif %}
 
 <title>{{ meta_title }}</title>
 <meta name="description" content="{{ meta_description }}">
@@ -23,10 +27,30 @@
 <meta name="twitter:description" content="{{ meta_description }}">
 <meta name="twitter:image" content="{{ og_image }}">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ page_type }}",
+  "headline": {{ meta_title | jsonify }},
+  "name": {{ meta_title | jsonify }},
+  "description": {{ meta_description | jsonify }},
+  "url": {{ canonical_url | jsonify }},
+  "image": [{{ og_image | jsonify }}]
+  {% if page.layout == 'post' %}
+  ,"datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": "hirotoarahata"
+  }
+  {% endif %}
+}
+</script>
+
 <link rel="icon" type="image/png" href="/images/favicon.png">
 
 <!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="{{ '/assets/css/tailwind.min.css' | relative_url }}">
 
 <!-- FontAwesome -->
 <link rel="stylesheet"
