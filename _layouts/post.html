@@ -8,7 +8,7 @@ layout: default
   {% if page.image %}
   <img src="{{ page.image | relative_url }}"
        alt="{{ page.title }}"
-       class="rounded-2xl mb-8 w-full object-cover">
+       class="rounded-2xl mb-8 mx-auto max-w-md">
 {% endif %}
 
     {{ content }}
