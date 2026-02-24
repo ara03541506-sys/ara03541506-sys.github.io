@@ -15,7 +15,7 @@ description: 市民ランナーが練習日誌、ランニングシューズの�
           <a href="{{ post.url | relative_url }}"
              class="block rounded-2xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
             <img src="{{ post.image | default: '/images/favicon.png' | relative_url }}"
-                 class="w-full h-64 object-cover"
+                 class="w-full h-48 sm:h-64 object-contain sm:object-cover bg-gray-100"
                  alt="{{ post.title }}">
             <div class="p-4">
               <p class="text-xs text-gray-500">{{ post.date | date: "%Y-%m-%d" }}</p>
