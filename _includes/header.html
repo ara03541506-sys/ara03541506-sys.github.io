@@ -1,16 +1,11 @@
-<header class="site-header bg-gradient-to-r from-orange-500 to-red-500 text-white p-8 shadow-md text-center">
-  <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+<header class="site-header text-center">
+  <h1 class="site-header-title">
      {{ page.title | default: site.title }}
   </h1>
-  <div class="mt-4">
+  <div class="top-back-wrap">
     <a href="{{ '/' | relative_url }}"
-       class="top-back-btn inline-flex items-center gap-2 px-8 py-3
-	bg-white text-orange-600
-	rounded-2xl shadow-lg
-	hover:bg-orange-50 transition"
-
->
-       ← TOPに戻る
+       class="top-back-btn">
+       ← TOPへ戻る
     </a>
   </div>
 </header>
