@@ -11,13 +11,13 @@ permalink: /category_shoes.html
   <div class="mb-6">
     <p class="text-sm text-gray-600 mb-3">メーカーで絞り込み</p>
     <div id="brand-filters" class="flex flex-wrap gap-2">
-      <button type="button" data-brand="all" class="brand-filter px-3 py-1.5 rounded-full border border-orange-500 bg-orange-500 text-white text-sm">すべて</button>
-      <button type="button" data-brand="adidas" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">adidas</button>
-      <button type="button" data-brand="nike" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">NIKE</button>
-      <button type="button" data-brand="puma" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">PUMA</button>
-      <button type="button" data-brand="asics" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">ASICS</button>
-      <button type="button" data-brand="brooks" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">BROOKS</button>
-      <button type="button" data-brand="new-balance" class="brand-filter px-3 py-1.5 rounded-full border border-gray-300 bg-white text-gray-700 text-sm">NB</button>
+      <button type="button" data-brand="all" class="brand-filter is-active px-3 py-1.5 rounded-full border text-sm">すべて</button>
+      <button type="button" data-brand="adidas" class="brand-filter px-3 py-1.5 rounded-full border text-sm">adidas</button>
+      <button type="button" data-brand="nike" class="brand-filter px-3 py-1.5 rounded-full border text-sm">NIKE</button>
+      <button type="button" data-brand="puma" class="brand-filter px-3 py-1.5 rounded-full border text-sm">PUMA</button>
+      <button type="button" data-brand="asics" class="brand-filter px-3 py-1.5 rounded-full border text-sm">ASICS</button>
+      <button type="button" data-brand="brooks" class="brand-filter px-3 py-1.5 rounded-full border text-sm">BROOKS</button>
+      <button type="button" data-brand="new-balance" class="brand-filter px-3 py-1.5 rounded-full border text-sm">NB</button>
     </div>
   </div>
 
@@ -55,6 +55,19 @@ permalink: /category_shoes.html
     </aside>
   </div>
 
+  <style>
+    .brand-filter {
+      border-color: #d1d5db;
+      background: #ffffff;
+      color: #374151;
+    }
+    .brand-filter.is-active {
+      border-color: #f97316;
+      background: #f97316;
+      color: #ffffff;
+    }
+  </style>
+
   <script>
     (function () {
       const buttons = document.querySelectorAll('.brand-filter');
@@ -73,12 +86,8 @@ permalink: /category_shoes.html
 
       buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
-          buttons.forEach((b) => {
-            b.classList.remove('border-orange-500', 'bg-orange-500', 'text-white');
-            b.classList.add('border-gray-300', 'bg-white', 'text-gray-700');
-          });
-          btn.classList.remove('border-gray-300', 'bg-white', 'text-gray-700');
-          btn.classList.add('border-orange-500', 'bg-orange-500', 'text-white');
+          buttons.forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
           applyFilter(btn.dataset.brand);
         });
       });
