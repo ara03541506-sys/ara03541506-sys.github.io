@@ -23,7 +23,7 @@ permalink: /category_shoes.html
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     <section class="md:col-span-3">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="grid grid-cols-2 gap-4 sm:gap-6">
         {% for post in site.categories.shoes %}
           {% assign filename = post.path | split:'/' | last | remove:'.md' | downcase %}
           {% assign parts = filename | split:'-' %}
