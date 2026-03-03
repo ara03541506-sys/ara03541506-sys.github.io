@@ -98,8 +98,35 @@ video {
 }
 
 .post-content img {
+  display: block;
+  max-width: 100% !important;
+  width: auto;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+.post-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .post-content {
+    overflow-x: hidden;
+  }
+
+  .post-content img {
+    max-width: calc(100vw - 3rem) !important;
+  }
+
+  .post-content th,
+  .post-content td {
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 
 
