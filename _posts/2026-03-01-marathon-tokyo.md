@@ -32,7 +32,10 @@ permalink: /running/marathon_tokyo2026.html
 また補給食はアミノサウルスジェルを10km、20km、30km、37km辺りで取っています。
 アミノサウルスジェルは01〜03のものを購入しました。
 
-<img src="{{ '/images/amino.JPG' | relative_url }}" alt="amino" style="max-width: 500px !important; width: 500px; height: auto;">
+<img src="{{ '/images/amino.JPG' | relative_url }}"
+     alt="amino"
+     style="width: 100%; max-width: 500px; height: auto;">
+
 
 <!-- START MoshimoAffiliateEasyLink -->
 <script type="text/javascript">
