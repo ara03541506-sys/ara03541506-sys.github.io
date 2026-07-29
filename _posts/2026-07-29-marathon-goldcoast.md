@@ -63,7 +63,7 @@ msmaflink({"n":"SAURUS完走PACK【決戦用】 アミノサウルスジェル�
      alt=""
      style="width: 100%; max-width: 300px; height: auto;">
 
-<img src="{{ '/images/drink.jpg' | relative_url }}"
+<img src="{{ '/images/drink.JPG' | relative_url }}"
      alt=""
      style="width: 70%; max-width: 300px; height: auto;">
 
