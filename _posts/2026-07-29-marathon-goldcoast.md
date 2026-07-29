@@ -9,7 +9,7 @@ permalink: /running/marathon_goldcoast2026.html
 
 今回の目標も東京マラソンと同じくサブ20。東京マラソンで2:20:49で走り、20分切りの感覚を掴み、気候的に東京マラソンよりいいためいけると判断。今回も前回学んだように突っ込むのではなく、ただハーフ70分通過ではなく69'30くらいで通過する事が理想。
 
-<img src="{{ '/images/uniform.jpg' | relative_url }}"
+<img src="{{ '/images/uniform.JPG' | relative_url }}"
      alt=""
      style="width: 60%; max-width: 300px; height: auto;">
 
@@ -75,7 +75,7 @@ msmaflink({"n":"SAURUS完走PACK【決戦用】 アミノサウルスジェル�
 日本のトップレースと違い、ゴールドコーストマラソンは自分が目指す**2:20切りが思ったより少ない。**集団も大人数になる事はなく、自分も引っ張る展開もあるかなと思っていたが、前日ハーフを走り、フル・ハーフの大会記録を狙う友人が引っ張ってくれるというので、69'30通過をリクエストし引いてもらった。(ちゃんと大会記録を10分ほど更新していた。)
 そして16'28-36とおよそ理想的なペース。ただ5kmで若干速いと感じている体もあった。後ろは5人ほどの集団で、ここもサブ20を目標としているらしいので10kmからそこと合流した。(外人2人が引く集団に友人含む日本人が3人着くという集団)
 
-<img src="{{ '/images/race.jpg' | relative_url }}"
+<img src="{{ '/images/race.JPG' | relative_url }}"
      alt=""
      style="width: 100%; max-width: 300px; height: auto;">
 
@@ -103,7 +103,7 @@ msmaflink({"n":"SAURUS完走PACK【決戦用】 アミノサウルスジェル�
 
 
 <small>マラソン前後一緒に行動した友人たちと。お世話になりました。</small>
-<img src="{{ '/images/goal.jpg' | relative_url }}"
+<img src="{{ '/images/goal.JPG' | relative_url }}"
      alt=""
      style="width: 100%; max-width: 300px; height: auto;">
 
