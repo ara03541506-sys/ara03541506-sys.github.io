@@ -2,14 +2,15 @@
 layout: default
 ---
 
-<main class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-    
-  <section class="post-content md:col-span-2 prose prose-lg leading-relaxed max-w-none mt-10">
-    {{ content }}
-  </section>
+{% assign category_key = page.categories | first %}
+{% if category_key == 'shoes' %}{% assign category_label = 'シューズ' %}{% elsif category_key == 'marathon' %}{% assign category_label = 'マラソン' %}{% else %}{% assign category_label = '日記' %}{% endif %}
 
-  <aside>
-    {% include sidebar.html %}
-  </aside>
-
-</main>
+<article class="post-shell">
+  <header class="post-header">
+    <div class="post-header__meta"><span class="category-badge category-badge--{{ category_key }}">{{ category_label }}</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日" }}</time></div>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="post-header__description">{{ page.description }}</p>{% endif %}
+  </header>
+  <div class="post-content">{{ content }}</div>
+  <section class="post-profile"><h2>市民ランナーの長距離ブログ</h2><p>1500m 3'51"26 / 5000m 14'34"18 / 10000m 30'16"90 / ハーフ 1:04:27 / フル 2:20:49 / 3000mSC 8'53"91</p></section>
+</article>

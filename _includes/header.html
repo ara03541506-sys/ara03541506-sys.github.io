@@ -1,11 +1,15 @@
-<header class="site-header text-center">
-  <h1 class="site-header-title">
-     {{ page.title | default: site.title }}
-  </h1>
-  <div class="top-back-wrap">
-    <a href="{{ '/' | relative_url }}"
-       class="top-back-btn">
-       ← TOPへ戻る
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} トップページ">
+      <span class="site-brand__eyebrow">Runner's Notebook</span>
+      <span class="site-brand__name">{{ site.title }}</span>
     </a>
+    <nav class="site-nav" aria-label="メインメニュー">
+      <a class="site-nav__home" href="{{ '/' | relative_url }}">トップ</a>
+      <a href="{{ '/category_theory.html' | relative_url }}">日記</a>
+      <a href="{{ '/category_marathon.html' | relative_url }}">マラソン</a>
+      <a href="{{ '/category_shoes.html' | relative_url }}">シューズ</a>
+      <a href="{{ '/diary/diary.html' | relative_url }}">練習記録</a>
+    </nav>
   </div>
 </header>

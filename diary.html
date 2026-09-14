@@ -5,12 +5,9 @@ description: 月別の走行距離とレース結果をまとめた練習日誌�
 permalink: /diary/diary.html
 ---
 
-<section class="max-w-6xl mx-auto p-6">
-  <h1 class="text-3xl font-bold mb-8 text-center">練習日誌</h1>
-
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-    <section class="md:col-span-3 space-y-6">
-      <h2 class="text-2xl font-bold border-b pb-2">月別練習まとめ</h2>
+<header class="listing-header"><div class="listing-header__inner"><p class="section-kicker">Training log</p><h1 class="section-heading">練習記録</h1><p class="section-intro">月ごとの走行距離とレース結果をまとめています。</p></div></header>
+<section class="page-shell">
+      <h2 class="section-heading">月別練習まとめ</h2>
 
       <div class="overflow-x-auto rounded-xl shadow">
         <table class="w-full border border-gray-300 bg-white">
@@ -67,10 +64,4 @@ permalink: /diary/diary.html
           </tbody>
         </table>
       </div>
-    </section>
-
-    <aside class="md:col-span-1 space-y-6">
-      {% include sidebar.html %}
-    </aside>
-  </div>
 </section>

@@ -4,43 +4,44 @@ title: 市民ランナーの長距離ブログ
 description: 市民ランナーが練習日誌、ランニングシューズの実走レビュー、マラソン大会の記録を発信。PBフル2:21:41・ハーフ1:04:27。
 ---
 
-<div class="max-w-6xl mx-auto px-4 py-8">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-    <section class="md:col-span-2">
-      <h2 class="text-xl font-semibold mb-6">最新記事</h2>
-
-      <div class="grid gap-6">
-        {% for post in site.posts limit: 4 %}
-          <a href="{{ post.url | relative_url }}"
-             class="block rounded-2xl shadow-sm overflow-hidden bg-white hover:shadow-md transition">
-            <img src="{{ post.image | default: '/images/favicon.png' | relative_url }}"
-                 class="w-full h-48 sm:h-64 object-contain sm:object-cover bg-gray-100"
-                 alt="{{ post.title }}">
-            <div class="p-4">
-              <p class="text-xs text-gray-500">{{ post.date | date: "%Y-%m-%d" }}</p>
-              <h3 class="text-lg font-bold text-orange-600 mt-1">{{ post.title }}</h3>
-              <p class="text-sm text-gray-600 mt-1">{{ post.description }}</p>
+<div class="page-shell">
+  <div class="home-grid">
+    <section>
+      <p class="section-kicker">Latest posts</p>
+      <h2 class="section-heading">最新の記事</h2>
+      <div class="latest-list">
+        {% for post in site.posts limit: 5 %}
+          {% assign category_key = post.categories | first %}
+          {% if category_key == 'shoes' %}{% assign category_label = 'シューズ' %}{% elsif category_key == 'marathon' %}{% assign category_label = 'マラソン' %}{% else %}{% assign category_label = '日記' %}{% endif %}
+          <a href="{{ post.url | relative_url }}" class="article-card">
+            <img src="{{ post.image | default: '/images/favicon.png' | relative_url }}" class="article-card__image" alt="{{ post.title }}">
+            <div class="article-card__body">
+              <div class="article-card__meta"><span class="category-badge category-badge--{{ category_key }}">{{ category_label }}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time></div>
+              <h3>{{ post.title }}</h3><p>{{ post.description }}</p>
             </div>
           </a>
-        {% else %}
-          <p class="text-sm text-gray-500">記事がまだありません。</p>
-        {% endfor %}
+        {% else %}<p>記事がまだありません。</p>{% endfor %}
       </div>
     </section>
 
-    <aside class="space-y-6">
-      {% include sidebar.html %}
+    <aside class="home-aside">
+      <section class="profile-card">
+        <p class="profile-card__label">About this blog</p><h2>市民ランナーの練習日誌</h2>
+        <p>レースの振り返りと日々の練習、実際に履いたシューズについて書いています。</p>
+        <div class="pb-list" aria-label="自己ベスト"><div><span>1500m</span><span>3'51"26</span></div><div><span>5000m</span><span>14'34"18</span></div><div><span>10000m</span><span>30'16"90</span></div><div><span>3000mSC</span><span>8'53"91</span></div></div>
+      </section>
+      <nav class="mini-nav" aria-label="カテゴリへのリンク">
+        <a href="{{ '/category_theory.html' | relative_url }}">日記 <span>→</span></a><a href="{{ '/category_marathon.html' | relative_url }}">マラソン <span>→</span></a><a href="{{ '/category_shoes.html' | relative_url }}">ランニングシューズ <span>→</span></a><a href="{{ '/diary/diary.html' | relative_url }}">月別練習記録 <span>→</span></a>
+      </nav>
     </aside>
-
   </div>
-</div>
 
-<section class="sr-only">
-  <h2>記事一覧</h2>
-  <ul>
-    {% for post in site.posts limit: 20 %}
-      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</section>
+  <section>
+    <p class="section-kicker">Explore</p><h2 class="section-heading">目的から探す</h2>
+    <div class="category-tiles">
+      <a class="category-tile category-tile--diary" href="{{ '/category_theory.html' | relative_url }}"><div class="category-tile__icon"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i></div><h2>日記</h2><p>練習やレースの前後、ランニングを続ける日々の記録。</p></a>
+      <a class="category-tile category-tile--marathon" href="{{ '/category_marathon.html' | relative_url }}"><div class="category-tile__icon"><i class="fa-solid fa-flag-checkered" aria-hidden="true"></i></div><h2>マラソン</h2><p>レース当日の動き、ラップ、振り返りをまとめています。</p></a>
+      <a class="category-tile category-tile--shoes" href="{{ '/category_shoes.html' | relative_url }}"><div class="category-tile__icon"><i class="fa-solid fa-shoe-prints" aria-hidden="true"></i></div><h2>ランニングシューズ</h2><p>実走したシューズを、用途ごとに正直にレビューします。</p></a>
+    </div>
+  </section>
+</div>
