@@ -11,6 +11,27 @@
   --shadow: 0 16px 40px rgba(23, 32, 51, .08);
 }
 
+.series-navigation { margin-top: 48px; }
+.series-navigation--previous { margin: 0 0 32px; }
+.series-card { display: flex; align-items: center; min-width: 0; overflow: hidden; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; }
+.series-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.series-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.series-card__image { flex: 0 0 180px; width: 180px; height: 140px; object-fit: cover; }
+.series-card__body { flex: 1; min-width: 0; padding: 18px; }
+.series-card__label { color: var(--orange-dark); font-size: .8rem; font-weight: 700; }
+.series-card h2 { margin: 8px 0; font-size: 1rem; font-weight: 700; line-height: 1.65; overflow-wrap: anywhere; }
+.series-card p { color: var(--muted); font-size: .85rem; line-height: 1.8; }
+@media (max-width: 640px) {
+  .series-card__image { flex-basis: 90px; width: 90px; height: 100px; }
+  .series-card__body { padding: 12px; }
+  .series-card h2 { font-size: .9rem; margin: 5px 0; }
+  .series-card p { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .series-card { transition: none; }
+  .series-card:hover { transform: none; }
+}
+
 html { scroll-behavior: smooth; }
 body.site-body { background: var(--canvas); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; }
 a { transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease; }

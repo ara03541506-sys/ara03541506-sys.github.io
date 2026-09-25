@@ -1,0 +1,26 @@
+{% if page.series %}
+  {% assign series_posts = site.posts | where: 'series', page.series | sort: 'series_order' %}
+  {% assign previous_article = nil %}
+  {% assign next_article = nil %}
+  {% for article in series_posts %}
+    {% if article.url == page.url %}
+      {% unless forloop.first %}
+        {% assign previous_index = forloop.index0 | minus: 1 %}
+        {% assign previous_article = series_posts[previous_index] %}
+      {% endunless %}
+      {% unless forloop.last %}
+        {% assign next_index = forloop.index0 | plus: 1 %}
+        {% assign next_article = series_posts[next_index] %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% if include.direction == 'previous' and previous_article %}
+    <nav class="series-navigation series-navigation--previous" aria-label="連載の前の記事">
+      {% include series-card.html article=previous_article direction='previous' label='← 前の記事' %}
+    </nav>
+  {% elsif include.direction == 'next' and next_article %}
+    <nav class="series-navigation series-navigation--next" aria-label="連載の次の記事">
+      {% include series-card.html article=next_article direction='next' label='次の記事 →' %}
+    </nav>
+  {% endif %}
+{% endif %}
