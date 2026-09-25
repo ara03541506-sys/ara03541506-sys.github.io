@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "アキレス腱断裂日記｜入院・手術編（9〜13日目）"
-description: "アキレス腱断裂後の入院、手術当日、術後の痛みと退院までを記録します。"
+description: "入院〜手術・退院までの経過"
 categories: theory
 series: achilles-diary
 series_order: 2

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "アキレス腱断裂日記｜退院後の生活・装具での歩行編（14〜26日目）"
-description: "退院後の生活とリハビリ、抜糸、そして装具を履いて再び足をつけるようになるまでの記録です。"
+description: "退院後のリハビリ〜装具着用編"
 categories: theory
 series: achilles-diary
 series_order: 3

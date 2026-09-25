@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "アキレス腱断裂日記｜断裂から手術前まで（1〜8日目）"
-description: "関東選手権3000mSCでアキレス腱を断裂。受傷当日から初診、手術前までの8日間を記録します。"
+description: "関東選手権3000mSCでアキレス腱を断裂。"
 categories: theory
 series: achilles-diary
 series_order: 1
