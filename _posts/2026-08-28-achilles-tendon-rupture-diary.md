@@ -10,8 +10,7 @@ permalink: /running/achilles-tendon-rupture-diary.html
 ---
 
 ![アキレス腱の怪我のリスクに関する遺伝子検査レポート]({{ '/images/mydensi.jpg' | relative_url }})
-
-8/21（金）、茨城で行われた関東選手権の3000mSCでアキレス腱を断裂した。ここでは、受傷当日から手術前までの過程を記録していく。
+↑以前やった遺伝子検査でもアキレス腱怪我リスクが高く、もしかしたらもう少し気をつけられたのかも。マイデンシ：（[https://mydensi.com/](https://mydensi.com/)）
 
 ## 1日目：関東選手権3000mSCで断裂
 
