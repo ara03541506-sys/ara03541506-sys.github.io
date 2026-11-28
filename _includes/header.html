@@ -10,6 +10,8 @@
       <a href="{{ '/category_marathon.html' | relative_url }}">マラソン</a>
       <a href="{{ '/category_shoes.html' | relative_url }}">シューズ</a>
       <a href="{{ '/diary/diary.html' | relative_url }}">練習記録</a>
+      {% assign app_pages = '/app.html,/running/runningcalculation.html,/running/shoe-lifespan.html' | split: ',' %}
+      <a href="{{ '/app.html' | relative_url }}"{% if app_pages contains page.url %} aria-current="page"{% endif %}>アプリ</a>
     </nav>
   </div>
 </header>
