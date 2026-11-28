@@ -1,0 +1,10 @@
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+.DS_Store
+supabase/.temp/
+supabase/.branches/
+.env
+.env.*
+!.env.example

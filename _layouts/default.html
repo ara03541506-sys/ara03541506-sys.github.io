@@ -3,7 +3,7 @@
 <head>
   {% include head.html %}
 </head>
-<body class="site-body min-h-screen">
+<body class="site-body min-h-screen{% if page.body_class %} {{ page.body_class | escape }}{% endif %}">
 
   {% include header.html %}
 

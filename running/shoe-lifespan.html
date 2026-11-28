@@ -1,0 +1,908 @@
+---
+layout: default
+title: KutsuDoki（クツドキ）｜ランニングシューズの交換目安・寿命記録
+description: KutsuDoki（クツドキ）は、ランニングシューズの替えどきを知る無料アプリ。使い終えたシューズの走行距離を記録し、交換目安を確認できます。
+permalink: /running/shoe-lifespan.html
+body_class: kutsudoki-page
+---
+
+<section
+  class="shoe-tool max-w-5xl mx-auto p-4 sm:p-6 space-y-6"
+  data-supabase-url="{{ site.supabase.url | default: '' | escape }}"
+  data-supabase-publishable-key="{{ site.supabase.publishable_key | default: '' | escape }}"
+>
+  <header class="shoe-tool__hero bg-white rounded-2xl shadow p-5 sm:p-7">
+    <div class="shoe-tool__hero-icon" aria-hidden="true"><i class="fa-solid fa-shoe-prints"></i></div>
+    <p class="text-xs font-bold tracking-widest text-orange-600 uppercase">Gear mileage log</p>
+    <h1 class="text-2xl sm:text-3xl font-bold mt-2">KutsuDoki<span class="shoe-tool__reading">クツドキ</span></h1>
+    <p class="shoe-tool__tagline">その一足の、替えどきを。</p>
+    <p class="text-sm text-gray-600 mt-3 leading-relaxed">
+      KutsuDoki（クツドキ）は、ランニングシューズの替えどきをお知らせします。<br>
+      使い終えたシューズの走行距離を記録し、交換目安を確認できます。
+    </p>
+    <p class="shoe-tool__notice">
+      シューズの記録は統計に利用しています<br>
+      <a href="{{ '/running/privacypolicy.html' | relative_url }}">プライバシーポリシー</a>
+    </p>
+  </header>
+
+  <section class="bg-white rounded-2xl shadow p-5 sm:p-7" aria-labelledby="record-heading">
+    <h2 id="record-heading" class="text-xl font-semibold">使い終えたシューズを登録</h2>
+    <p class="text-sm text-gray-600 mt-2">使用を終了したシューズを登録してください。</p>
+
+    <form id="record-form" class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div>
+        <label for="manufacturer" class="block text-sm font-medium text-gray-700 mb-1">メーカー名</label>
+        <select id="manufacturer" name="manufacturer" class="w-full rounded-lg border px-3 py-3 text-base" required aria-controls="shoe-name custom-manufacturer-wrap">
+          <option value="">メーカーを選択</option>
+        </select>
+        <div id="custom-manufacturer-wrap" class="mt-3" hidden>
+          <label for="custom-manufacturer" class="block text-sm font-medium text-gray-700 mb-1">メーカー名を入力</label>
+          <input id="custom-manufacturer" name="customManufacturer" type="text" minlength="2" maxlength="40" list="manufacturer-name-options" placeholder="例: HOKA" class="w-full rounded-lg border px-3 py-3 text-base" disabled>
+          <datalist id="manufacturer-name-options"></datalist>
+        </div>
+      </div>
+
+      <div>
+        <label for="shoe-name" class="block text-sm font-medium text-gray-700 mb-1">シューズ名</label>
+        <select id="shoe-name" name="shoeModel" class="w-full rounded-lg border px-3 py-3 text-base" required disabled aria-controls="custom-shoe-name-wrap">
+          <option value="">シューズを選択</option>
+        </select>
+        <div id="custom-shoe-name-wrap" class="mt-3" hidden>
+          <label for="custom-shoe-name" class="block text-sm font-medium text-gray-700 mb-1">シューズ入力</label>
+          <input id="custom-shoe-name" name="customShoeModel" type="text" minlength="2" maxlength="80" placeholder="例: Clifton 10" class="w-full rounded-lg border px-3 py-3 text-base" autocomplete="off" aria-controls="model-name-suggestions" disabled>
+          <div id="model-name-suggestions" class="shoe-tool__suggestions" role="group" aria-label="シューズ名の入力候補" hidden></div>
+        </div>
+      </div>
+
+      <div>
+        <label for="distance" class="block text-sm font-medium text-gray-700 mb-1">使用距離 (km)</label>
+        <input
+          id="distance"
+          name="distance"
+          type="number"
+          min="10"
+          max="3000"
+          step="0.1"
+          inputmode="decimal"
+          placeholder="例: 650"
+          class="w-full rounded-lg border border-gray-300 px-3 py-3 text-base"
+          required
+        >
+      </div>
+
+      <div class="sm:col-span-3">
+        <label for="pair-label" class="block text-sm font-medium text-gray-700 mb-1">識別名（任意）</label>
+        <input id="pair-label" name="pairLabel" type="text" maxlength="40" placeholder="例：青、白、2足目" class="w-full rounded-lg border px-3 py-3 text-base" aria-describedby="pair-label-help">
+        <p id="pair-label-help" class="text-xs text-gray-500 mt-2">自分の記録だけに表示されます。登録後も一覧から変更できます。</p>
+      </div>
+
+      <div class="sm:col-span-3 flex flex-wrap gap-2">
+        <button
+          id="submit-record"
+          type="submit"
+          class="rounded-lg bg-orange-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          記録を追加
+        </button>
+        <button id="cancel-edit" type="button" class="shoe-tool__cancel-edit" hidden>編集をキャンセル</button>
+        <button
+          id="clear-all"
+          type="button"
+          class="rounded-lg bg-gray-200 text-gray-800 px-5 py-2.5 text-sm font-semibold hover:bg-gray-300"
+        >
+          自分の記録を全件削除
+        </button>
+      </div>
+      <p id="form-status" class="sm:col-span-3 text-sm" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5 sm:p-7" aria-labelledby="personal-records-heading">
+    <div class="flex flex-wrap items-end justify-between gap-2">
+      <div>
+        <h2 id="personal-records-heading" class="text-xl font-semibold">自分の記録</h2>
+      </div>
+    </div>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="text-left p-2 whitespace-nowrap">メーカー名</th>
+            <th class="text-left p-2">シューズ名</th>
+            <th class="text-left p-2 whitespace-nowrap">廃棄距離</th>
+            <th class="text-left p-2 whitespace-nowrap">識別名</th>
+            <th class="text-left p-2">匿名統計</th>
+            <th class="text-left p-2">操作</th>
+          </tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5 sm:p-7" aria-labelledby="personal-stats-heading">
+    <h2 id="personal-stats-heading" class="text-xl font-semibold">自分のシューズ集計</h2>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="text-left p-2 whitespace-nowrap">メーカー名</th>
+            <th class="text-left p-2">シューズ名</th>
+            <th class="text-left p-2">件数</th>
+            <th class="text-left p-2">平均</th>
+            <th class="text-left p-2">中央値</th>
+          </tr>
+        </thead>
+        <tbody id="personal-stats-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bg-white rounded-2xl shadow p-5 sm:p-7" aria-labelledby="community-stats-heading">
+    <h2 id="community-stats-heading" class="text-xl font-semibold">みんなのシューズ寿命統計</h2>
+    <div class="shoe-tool__stats-tabs" role="tablist" aria-label="シューズ寿命統計の表示">
+      <button id="community-tab-top" type="button" role="tab" aria-selected="true" aria-controls="community-stats-panel" tabindex="0">登録数トップ5</button>
+      <button id="community-tab-search" type="button" role="tab" aria-selected="false" aria-controls="community-stats-panel" tabindex="-1">シューズを検索</button>
+    </div>
+    <div id="community-stats-panel" role="tabpanel" aria-labelledby="community-tab-top" tabindex="0">
+      <div id="community-search-controls" class="shoe-tool__stats-search" hidden>
+        <label for="community-search">メーカー名・シューズ名で検索</label>
+        <input id="community-search" type="search" placeholder="例：ナイキ、Pegasus 41" autocomplete="off" aria-controls="community-stats-body">
+      </div>
+      <p id="community-status" class="text-xs text-gray-500 mt-2" role="status" aria-live="polite"></p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="text-left p-2 whitespace-nowrap">メーカー名</th>
+            <th class="text-left p-2">シューズ名</th>
+            <th class="text-left p-2">件数</th>
+            <th class="text-left p-2">平均</th>
+            <th class="text-left p-2">中央値</th>
+            <th class="text-left p-2 whitespace-nowrap">補正平均</th>
+            <th class="text-left p-2">観測範囲</th>
+          </tr>
+        </thead>
+        <tbody id="community-stats-body"></tbody>
+      </table>
+    </div>
+    </div>
+  </section>
+</section>
+
+<script type="module">
+import * as shoeNames from "{{ '/assets/js/shoe-names.mjs' | relative_url }}";
+
+(() => {
+  const { cleanName, nameKey } = shoeNames;
+  const STORAGE_KEY = "shoeLifespanRecordsV2";
+  const LEGACY_STORAGE_KEY = "shoeLifespanRecordsV1";
+  const CLIENT_ID_KEY = "shoeLifespanClientIdV1";
+  const appConfig = document.querySelector(".shoe-tool");
+  const SUPABASE_URL = appConfig.dataset.supabaseUrl || "";
+  const SUPABASE_PUBLISHABLE_KEY = appConfig.dataset.supabasePublishableKey || "";
+  const COMMUNITY_ENABLED = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
+  // Compatibility aliases for older records; dropdown choices come from
+  // Supabase and this browser's records, not from a bundled model catalog.
+  const LEGACY_MANUFACTURERS = shoeNames.MANUFACTURERS;
+  const CUSTOM_OPTION = "__custom__";
+  const LEGACY_OPTION = "__legacy__";
+
+  const form = document.getElementById("record-form");
+  const submitButton = document.getElementById("submit-record");
+  const recordHeading = document.getElementById("record-heading");
+  const cancelEditButton = document.getElementById("cancel-edit");
+  const clearAllButton = document.getElementById("clear-all");
+  const formStatus = document.getElementById("form-status");
+  const recordsBody = document.getElementById("records-body");
+  const personalStatsBody = document.getElementById("personal-stats-body");
+  const communityStatsBody = document.getElementById("community-stats-body");
+  const communityStatus = document.getElementById("community-status");
+  const communityTopTab = document.getElementById("community-tab-top");
+  const communitySearchTab = document.getElementById("community-tab-search");
+  const communityStatsPanel = document.getElementById("community-stats-panel");
+  const communitySearchControls = document.getElementById("community-search-controls");
+  const communitySearch = document.getElementById("community-search");
+  const manufacturerSelect = document.getElementById("manufacturer");
+  const modelSelect = document.getElementById("shoe-name");
+  const customManufacturer = document.getElementById("custom-manufacturer");
+  const customModel = document.getElementById("custom-shoe-name");
+  const customManufacturerWrap = document.getElementById("custom-manufacturer-wrap");
+  const customModelWrap = document.getElementById("custom-shoe-name-wrap");
+  const manufacturerOptions = document.getElementById("manufacturer-name-options");
+  const modelSuggestions = document.getElementById("model-name-suggestions");
+
+  let communityModels = [];
+  let communityStatistics = [];
+  let communityView = "top";
+  let communityLoadState = "loading";
+  let sharedCatalog = [];
+  let records = loadRecords();
+  let editingRecordId = null;
+  let isSaving = false;
+
+  function normalizeManufacturer(value) {
+    return shoeNames.normalizeManufacturer(value, sharedCatalog);
+  }
+
+  // Preserve legacy names when no manufacturer can be identified reliably.
+  function shoeParts(item) {
+    if (item.manufacturer && item.modelName) {
+      return { manufacturer: normalizeManufacturer(item.manufacturer), modelName: cleanName(item.modelName) };
+    }
+    const fullName = cleanName(item.shoeName);
+    for (const brand of LEGACY_MANUFACTURERS) {
+      for (const alias of [brand.name, ...brand.aliases]) {
+        if (fullName.toLowerCase().startsWith(`${alias.toLowerCase()} `)) {
+          return { manufacturer: brand.name, modelName: fullName.slice(alias.length).trim() };
+        }
+      }
+    }
+    return { manufacturer: "", modelName: fullName };
+  }
+
+  function addOption(select, value, label = value) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    select.appendChild(option);
+  }
+
+  function knownShoes() {
+    return [...sharedCatalog, ...records, ...communityModels].map(shoeParts);
+  }
+
+  function selectedManufacturer() {
+    if (manufacturerSelect.value === LEGACY_OPTION) return "";
+    return normalizeManufacturer(manufacturerSelect.value === CUSTOM_OPTION
+      ? customManufacturer.value : manufacturerSelect.value);
+  }
+
+  function refreshManufacturers() {
+    const selected = manufacturerSelect.value;
+    manufacturerSelect.innerHTML = "";
+    manufacturerOptions.innerHTML = "";
+    addOption(manufacturerSelect, "", "メーカーを選択");
+    const names = new Map();
+    knownShoes().forEach((shoe) => {
+      if (shoe.manufacturer && !names.has(nameKey(shoe.manufacturer))) {
+        names.set(nameKey(shoe.manufacturer), shoe.manufacturer);
+      }
+    });
+    names.forEach((name) => {
+      addOption(manufacturerSelect, name);
+      const option = document.createElement("option");
+      option.value = name;
+      const brand = LEGACY_MANUFACTURERS.find((entry) => entry.name === name);
+      option.label = brand ? `${name} / ${brand.aliases.join(" / ")}` : name;
+      manufacturerOptions.appendChild(option);
+    });
+    addOption(manufacturerSelect, CUSTOM_OPTION, "その他（手入力）");
+    if (records.some((record) => record.id === editingRecordId && !shoeParts(record).manufacturer)) {
+      addOption(manufacturerSelect, LEGACY_OPTION, "未設定（現在の記録）");
+    }
+    if ([...manufacturerSelect.options].some((option) => option.value === selected)) {
+      manufacturerSelect.value = selected;
+    }
+  }
+
+  function updateCustomModel() {
+    const manual = !modelSelect.disabled && modelSelect.value === CUSTOM_OPTION;
+    customModelWrap.hidden = !manual;
+    customModel.disabled = !manual;
+    customModel.required = manual;
+    if (!manual) customModel.value = "";
+    renderModelSuggestions();
+  }
+
+  function renderModelSuggestions() {
+    modelSuggestions.innerHTML = "";
+    const matches = customModel.disabled ? [] : shoeNames.suggestShoes(selectedManufacturer(), customModel.value, knownShoes());
+    modelSuggestions.hidden = matches.length === 0;
+    matches.forEach((shoe) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = shoe.modelName;
+      button.addEventListener("pointerdown", (event) => event.preventDefault());
+      button.addEventListener("click", () => {
+        customModel.value = shoe.modelName;
+        if (manufacturerSelect.value === CUSTOM_OPTION) customManufacturer.value = shoe.manufacturer;
+        modelSuggestions.hidden = true;
+      });
+      modelSuggestions.appendChild(button);
+    });
+  }
+
+  function normalizeCustomModel() {
+    if (customModel.disabled || !customModel.value) return;
+    const shoe = shoeNames.resolveShoe(selectedManufacturer(), customModel.value, knownShoes());
+    customModel.value = shoe.modelName;
+    if (manufacturerSelect.value === CUSTOM_OPTION) customManufacturer.value = shoe.manufacturer;
+    renderModelSuggestions();
+  }
+
+  function refreshModels(preserveSelection = false) {
+    const previous = modelSelect.value;
+    const manufacturer = selectedManufacturer();
+    const legacyRecord = manufacturerSelect.value === LEGACY_OPTION
+      ? records.find((record) => record.id === editingRecordId) : null;
+    modelSelect.innerHTML = "";
+    modelSelect.disabled = !manufacturer && !legacyRecord;
+    addOption(modelSelect, "", "シューズを選択");
+    if (legacyRecord) addOption(modelSelect, shoeParts(legacyRecord).modelName);
+    if (manufacturer) {
+      const models = new Map();
+      knownShoes().forEach((shoe) => {
+        if (nameKey(shoe.manufacturer) === nameKey(manufacturer) && shoe.modelName && !models.has(nameKey(shoe.modelName))) {
+          models.set(nameKey(shoe.modelName), shoe.modelName);
+        }
+      });
+      models.forEach((model) => addOption(modelSelect, model));
+      addOption(modelSelect, CUSTOM_OPTION, "その他（手入力）");
+    }
+    if (preserveSelection && [...modelSelect.options].some((option) => option.value === previous)) {
+      modelSelect.value = previous;
+    }
+    updateCustomModel();
+  }
+
+  function updateManufacturer() {
+    const manual = manufacturerSelect.value === CUSTOM_OPTION;
+    customManufacturerWrap.hidden = !manual;
+    customManufacturer.disabled = !manual;
+    customManufacturer.required = manual;
+    if (!manual) customManufacturer.value = "";
+    customModel.value = "";
+    refreshModels();
+  }
+
+  function resetRecordForm() {
+    editingRecordId = null;
+    recordHeading.textContent = "使い終えたシューズを登録";
+    submitButton.textContent = "記録を追加";
+    cancelEditButton.hidden = true;
+    form.reset();
+    refreshManufacturers();
+    updateManufacturer();
+  }
+
+  manufacturerSelect.addEventListener("change", updateManufacturer);
+  customManufacturer.addEventListener("input", () => refreshModels());
+  customManufacturer.addEventListener("blur", () => {
+    customManufacturer.value = normalizeManufacturer(customManufacturer.value);
+    refreshModels(true);
+  });
+  modelSelect.addEventListener("change", updateCustomModel);
+  customModel.addEventListener("input", renderModelSuggestions);
+  customModel.addEventListener("blur", normalizeCustomModel);
+
+  function createUuid() {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      return window.crypto.randomUUID();
+    }
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (char) =>
+      (Number(char) ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (Number(char) / 4)))).toString(16)
+    );
+  }
+
+  function getClientId() {
+    let clientId = localStorage.getItem(CLIENT_ID_KEY);
+    if (!clientId) {
+      clientId = createUuid();
+      localStorage.setItem(CLIENT_ID_KEY, clientId);
+    }
+    return clientId;
+  }
+
+  function loadRecords() {
+    try {
+      const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (Array.isArray(current)) return current.map(normalizeLocalRecord).filter(Boolean);
+
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "null");
+      if (!Array.isArray(legacy)) return [];
+      const migrated = legacy.map(normalizeLocalRecord).filter(Boolean);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      return migrated;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function normalizeLocalRecord(item) {
+    if (!item || typeof item.shoeName !== "string" || !Number.isFinite(Number(item.distance))) return null;
+    return {
+      id: typeof item.id === "string" ? item.id : createUuid(),
+      shoeName: item.shoeName.trim(),
+      ...shoeParts(item),
+      pairLabel: typeof item.pairLabel === "string" ? cleanName(item.pairLabel).slice(0, 40) : "",
+      pendingUpdate: item.pendingUpdate === true,
+      structuredNames: item.structuredNames === true,
+      distance: Number(item.distance),
+      shareStatus: ["shared", "failed", "private"].includes(item.shareStatus) ? item.shareStatus : "private",
+      createdAt: item.createdAt || new Date().toISOString()
+    };
+  }
+
+  function saveRecords() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  function toKm(value) {
+    return `${Number(value).toFixed(1)} km`;
+  }
+
+  function average(values) {
+    return values.reduce((sum, value) => sum + value, 0) / values.length;
+  }
+
+  function median(values) {
+    const sorted = [...values].sort((a, b) => a - b);
+    const middle = Math.floor(sorted.length / 2);
+    return sorted.length % 2 === 0
+      ? (sorted[middle - 1] + sorted[middle]) / 2
+      : sorted[middle];
+  }
+
+  function setFormStatus(message, type = "info") {
+    formStatus.textContent = message;
+    formStatus.className = `sm:col-span-3 text-sm ${type === "error" ? "text-red-700" : type === "success" ? "text-green-700" : "text-gray-600"}`;
+  }
+
+  function renderRecords() {
+    recordsBody.innerHTML = "";
+    if (records.length === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = '<td colspan="6" class="p-3 text-gray-500">記録はまだありません。</td>';
+      recordsBody.appendChild(row);
+      return;
+    }
+
+    records.forEach((record) => {
+      const row = document.createElement("tr");
+      row.className = "border-t";
+      row.innerHTML = '<td class="p-2"></td><td class="p-2"></td><td class="p-2 whitespace-nowrap"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2"></td>';
+      const shoe = shoeParts(record);
+      row.children[0].textContent = shoe.manufacturer || "未設定";
+      row.children[1].textContent = shoe.modelName;
+      row.children[2].textContent = toKm(record.distance);
+
+      const pairLabel = document.createElement("input");
+      pairLabel.type = "text";
+      pairLabel.className = "shoe-tool__pair-label";
+      pairLabel.maxLength = 40;
+      pairLabel.placeholder = "例：青・2足目";
+      pairLabel.value = record.pairLabel || "";
+      pairLabel.disabled = isSaving || record.id === editingRecordId;
+      pairLabel.setAttribute("aria-label", `${shoe.modelName}（${toKm(record.distance)}）の識別名`);
+      pairLabel.addEventListener("input", () => {
+        record.pairLabel = cleanName(pairLabel.value).slice(0, 40);
+        saveRecords();
+      });
+      pairLabel.addEventListener("change", () => { pairLabel.value = record.pairLabel || ""; });
+      row.children[3].appendChild(pairLabel);
+
+      const status = document.createElement("span");
+      if (record.shareStatus === "shared") {
+        status.className = "text-green-700";
+        status.textContent = "提供済み";
+      } else if (record.shareStatus === "failed") {
+        status.className = "text-red-700";
+        status.textContent = "送信失敗 ";
+        const retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "underline font-semibold";
+        retry.textContent = "再試行";
+        retry.disabled = isSaving;
+        retry.addEventListener("click", () => retryShare(record));
+        status.appendChild(retry);
+      } else {
+        status.className = "text-gray-500";
+        status.textContent = "提供なし";
+      }
+      row.children[4].appendChild(status);
+
+      const edit = document.createElement("button");
+      edit.type = "button";
+      edit.className = "shoe-tool__edit-record";
+      edit.textContent = "編集";
+      edit.disabled = isSaving;
+      edit.addEventListener("click", () => startEditing(record));
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "rounded bg-red-50 text-red-700 px-2 py-1 hover:bg-red-100";
+      remove.textContent = "削除";
+      remove.disabled = isSaving;
+      remove.addEventListener("click", () => {
+        if (isSaving) return;
+        if (editingRecordId === record.id) resetRecordForm();
+        records = records.filter((item) => item.id !== record.id);
+        saveRecords();
+        renderAllLocal();
+      });
+      row.children[5].appendChild(remove);
+      row.children[5].appendChild(edit);
+      recordsBody.appendChild(row);
+    });
+  }
+
+  function renderPersonalStats() {
+    personalStatsBody.innerHTML = "";
+    if (records.length === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = '<td colspan="5" class="p-3 text-gray-500">集計対象がありません。</td>';
+      personalStatsBody.appendChild(row);
+      return;
+    }
+
+    const groups = new Map();
+    records.forEach((record) => {
+      const shoe = shoeParts(record);
+      const key = JSON.stringify([shoe.manufacturer.toLowerCase(), shoe.modelName.toLowerCase()]);
+      const group = groups.get(key) || { ...shoe, values: [] };
+      group.values.push(record.distance);
+      groups.set(key, group);
+    });
+
+    [...groups.keys()].sort((a, b) => a.localeCompare(b, "ja")).forEach((key) => {
+      const { manufacturer, modelName, values } = groups.get(key);
+      const row = document.createElement("tr");
+      row.className = "border-t";
+      row.innerHTML = '<td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2 font-semibold text-orange-700"></td>';
+      row.children[0].textContent = manufacturer || "未設定";
+      row.children[1].textContent = modelName;
+      row.children[2].textContent = String(values.length);
+      row.children[3].textContent = toKm(average(values));
+      row.children[4].textContent = toKm(median(values));
+      personalStatsBody.appendChild(row);
+    });
+  }
+
+  function renderAllLocal() {
+    renderRecords();
+    renderPersonalStats();
+    refreshManufacturers();
+    refreshModels(true);
+  }
+
+  function renderCommunityStats(stats) {
+    communityStatistics = [...stats].sort((a, b) =>
+      b.sample_count - a.sample_count || a.shoe_name.localeCompare(b.shoe_name, "ja"));
+    communityModels = communityStatistics.map((stat) => ({ shoeName: stat.shoe_name }));
+    refreshManufacturers();
+    refreshModels(true);
+    renderCommunityView();
+  }
+
+  function matchesCommunitySearch(stat, keywords) {
+    const shoe = shoeParts({ shoeName: stat.shoe_name });
+    const brand = LEGACY_MANUFACTURERS.find((entry) => entry.name === shoe.manufacturer);
+    const names = nameKey([stat.shoe_name, shoe.manufacturer, shoe.modelName, ...(brand?.aliases || [])].join(" "));
+    const model = shoeNames.modelKey(shoe.modelName, shoe.manufacturer);
+    return keywords.every((keyword) => {
+      const modelKeyword = shoeNames.modelKey(keyword, shoe.manufacturer);
+      return names.includes(keyword) || (modelKeyword && model.includes(modelKeyword));
+    });
+  }
+
+  function renderCommunityView() {
+    const searching = communityView === "search";
+    communityTopTab.setAttribute("aria-selected", String(!searching));
+    communitySearchTab.setAttribute("aria-selected", String(searching));
+    communityTopTab.tabIndex = searching ? -1 : 0;
+    communitySearchTab.tabIndex = searching ? 0 : -1;
+    communityStatsPanel.setAttribute("aria-labelledby", searching ? communitySearchTab.id : communityTopTab.id);
+    communitySearchControls.hidden = !searching;
+    const keywords = cleanName(communitySearch.value).split(" ").map(nameKey).filter(Boolean);
+    const visible = searching
+      ? (keywords.length ? communityStatistics.filter((stat) => matchesCommunitySearch(stat, keywords)) : [])
+      : communityStatistics.slice(0, 5);
+    const messages = {
+      loading: "統計を読み込んでいます…",
+      disabled: "匿名統計は現在準備中です。",
+      error: "統計を取得できませんでした。時間をおいて再読み込みしてください。"
+    };
+    communityStatus.textContent = messages[communityLoadState] || (communityStatistics.length === 0
+      ? "統計データを募集中です。"
+      : searching
+        ? (keywords.length ? `${visible.length}種類が見つかりました。` : "すべてのシューズ寿命統計から検索できます。")
+        : `登録件数の多い${visible.length}種類を表示しています（全${communityStatistics.length}種類）。`);
+    communityStatsBody.innerHTML = "";
+    if (visible.length === 0) {
+      const row = document.createElement("tr");
+      const cell = document.createElement("td");
+      cell.colSpan = 7;
+      cell.className = "p-3 text-gray-500";
+      cell.textContent = messages[communityLoadState] || (communityStatistics.length === 0
+        ? "登録されているシューズはまだありません"
+        : keywords.length ? "一致するシューズはありません。" : "メーカー名またはシューズ名を入力してください。");
+      row.appendChild(cell);
+      communityStatsBody.appendChild(row);
+      return;
+    }
+
+    visible.forEach((stat) => {
+      const row = document.createElement("tr");
+      row.className = "border-t";
+      row.innerHTML = '<td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2"></td><td class="p-2 font-semibold text-orange-700"></td><td class="p-2"></td><td class="p-2 whitespace-nowrap"></td>';
+      const shoe = shoeParts({ shoeName: stat.shoe_name });
+      row.children[0].textContent = shoe.manufacturer || "未設定";
+      row.children[1].textContent = shoe.modelName;
+      row.children[2].textContent = String(stat.sample_count);
+      row.children[3].textContent = toKm(stat.average_km);
+      row.children[4].textContent = toKm(stat.median_km);
+      row.children[5].textContent = stat.sample_count >= 10 ? toKm(stat.trimmed_average_km) : "—";
+      row.children[6].textContent = `${toKm(stat.minimum_km)}〜${toKm(stat.maximum_km)}`;
+      communityStatsBody.appendChild(row);
+    });
+  }
+
+  async function fetchShoeCatalog() {
+    if (!COMMUNITY_ENABLED) return;
+    try {
+      const pageSize = 1000;
+      const models = [];
+      for (let offset = 0; ; offset += pageSize) {
+        const endpoint = `${SUPABASE_URL}/rest/v1/rpc/get_shoe_catalog?order=shoe_name.asc,manufacturer.asc,model_name.asc&limit=${pageSize}&offset=${offset}`;
+        const response = await fetch(endpoint, {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY }
+        });
+        if (!response.ok) throw new Error(`catalog_${response.status}`);
+        const page = await response.json();
+        if (!Array.isArray(page)) throw new Error("invalid_catalog");
+        page.forEach((entry) => {
+          if (!entry || typeof entry.shoe_name !== "string") return;
+          const shoe = shoeParts({
+            shoeName: entry.shoe_name,
+            manufacturer: typeof entry.manufacturer === "string" ? entry.manufacturer : "",
+            modelName: typeof entry.model_name === "string" ? entry.model_name : ""
+          });
+          if (shoe.manufacturer && shoe.modelName && shoe.manufacturer !== CUSTOM_OPTION && shoe.modelName !== CUSTOM_OPTION) {
+            models.push(shoe);
+          }
+        });
+        if (page.length < pageSize) break;
+      }
+      sharedCatalog = models;
+      refreshManufacturers();
+      refreshModels(true);
+    } catch (error) {
+      // Keep local records, manual input and previously loaded names usable.
+      console.warn("共有シューズ候補を取得できませんでした。", error);
+    }
+  }
+
+  async function fetchCommunityStats() {
+    if (!COMMUNITY_ENABLED) {
+      communityLoadState = "disabled";
+      renderCommunityStats([]);
+      return;
+    }
+
+    communityLoadState = "loading";
+    renderCommunityView();
+    try {
+      const fields = "shoe_name,sample_count,average_km,median_km,trimmed_average_km,minimum_km,maximum_km,updated_at";
+      const stats = [];
+      // Continue to an empty page so a server-side row cap never truncates search.
+      for (let offset = 0; ; ) {
+        const endpoint = `${SUPABASE_URL}/rest/v1/shoe_lifespan_stats?select=${fields}&order=sample_count.desc,shoe_name.asc,shoe_model_id.asc&limit=1000&offset=${offset}`;
+        const response = await fetch(endpoint, {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY }
+        });
+        if (!response.ok) throw new Error(`stats_${response.status}`);
+        const page = await response.json();
+        if (!Array.isArray(page)) throw new Error("invalid_stats");
+        if (page.length === 0) break;
+        stats.push(...page);
+        offset += page.length;
+      }
+      communityLoadState = "ready";
+      renderCommunityStats(stats);
+    } catch (error) {
+      communityLoadState = "error";
+      renderCommunityStats([]);
+    }
+  }
+
+  async function submitCommunity(record) {
+    const endpoint = `${SUPABASE_URL}/functions/v1/submit-shoe-lifespan`;
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        requestId: record.id,
+        ...(record.pendingUpdate ? { action: "save" } : {}),
+        clientId: getClientId(),
+        shoeName: record.shoeName,
+        // Legacy retries keep the exact original name used for aggregation.
+        ...(record.structuredNames ? {
+          manufacturer: record.manufacturer,
+          modelName: record.modelName
+        } : {}),
+        distanceKm: record.distance,
+        consent: true
+      })
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const messages = {
+        invalid_submission: "入力内容を確認してください。",
+        record_not_owned: "この記録を更新できません。登録時と同じブラウザで操作してください。",
+        server_not_configured: "匿名統計は現在準備中です。"
+      };
+      throw new Error(messages[result.error] || "匿名統計への送信に失敗しました。");
+    }
+    if (record.structuredNames && result.shoe && typeof result.shoe.manufacturer === "string" && typeof result.shoe.modelName === "string" && typeof result.shoe.shoeName === "string") {
+      record.manufacturer = result.shoe.manufacturer;
+      record.modelName = result.shoe.modelName;
+      record.shoeName = result.shoe.shoeName;
+    }
+  }
+
+  async function retryShare(record) {
+    if (!COMMUNITY_ENABLED || isSaving) return;
+    setSaving(true);
+    setFormStatus("匿名統計へ再送しています…");
+    try {
+      await submitCommunity(record);
+      record.shareStatus = "shared";
+      record.pendingUpdate = false;
+      saveRecords();
+      renderAllLocal();
+      setFormStatus("匿名統計へ提供しました。公開統計には1件目から表示されます。", "success");
+      await Promise.all([fetchShoeCatalog(), fetchCommunityStats()]);
+    } catch (error) {
+      setFormStatus(error.message, "error");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function setSaving(saving) {
+    isSaving = saving;
+    submitButton.disabled = saving;
+    cancelEditButton.disabled = saving;
+    clearAllButton.disabled = saving;
+    submitButton.textContent = saving ? "保存中…" : editingRecordId ? "変更を保存" : "記録を追加";
+    renderRecords();
+  }
+
+  function startEditing(record) {
+    if (isSaving) return;
+    editingRecordId = record.id;
+    const shoe = shoeParts(record);
+    refreshManufacturers();
+    manufacturerSelect.value = shoe.manufacturer || LEGACY_OPTION;
+    updateManufacturer();
+    if ([...modelSelect.options].some((option) => option.value === shoe.modelName)) {
+      modelSelect.value = shoe.modelName;
+      updateCustomModel();
+    } else {
+      modelSelect.value = CUSTOM_OPTION;
+      updateCustomModel();
+      customModel.value = shoe.modelName;
+    }
+    document.getElementById("distance").value = String(record.distance);
+    document.getElementById("pair-label").value = record.pairLabel || "";
+    recordHeading.textContent = "シューズの記録を編集";
+    submitButton.textContent = "変更を保存";
+    cancelEditButton.hidden = false;
+    setFormStatus("内容を修正し、「変更を保存」を押してください。");
+    renderRecords();
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+    manufacturerSelect.focus({ preventScroll: true });
+  }
+
+  cancelEditButton.addEventListener("click", () => {
+    if (isSaving) return;
+    resetRecordForm();
+    renderRecords();
+    setFormStatus("編集をキャンセルしました。");
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (isSaving) return;
+    const existing = records.find((record) => record.id === editingRecordId);
+    const formData = new FormData(form);
+    const rawManufacturer = selectedManufacturer();
+    const rawModel = cleanName(modelSelect.value === CUSTOM_OPTION
+      ? formData.get("customShoeModel") : formData.get("shoeModel"));
+    const previousShoe = existing ? shoeParts(existing) : null;
+    const keepingNames = existing && (manufacturerSelect.value === LEGACY_OPTION ||
+      (rawManufacturer === previousShoe.manufacturer && rawModel === previousShoe.modelName));
+    const { manufacturer, modelName } = keepingNames ? previousShoe
+      : shoeNames.resolveShoe(rawManufacturer, rawModel, knownShoes());
+    const shoeName = keepingNames ? existing.shoeName : `${manufacturer} ${modelName}`;
+    const structuredNames = keepingNames ? existing.structuredNames : true;
+    const distance = Number(formData.get("distance"));
+    const pairLabel = cleanName(formData.get("pairLabel"));
+
+    if (pairLabel.length > 40) {
+      setFormStatus("識別名は40文字以内で入力してください。", "error");
+      return;
+    }
+    if ((!keepingNames && manufacturer.length < 2) || manufacturer.length > 40 || modelName.length < 2 || shoeName.length > 80 || !Number.isFinite(distance) || distance < 10 || distance > 3000) {
+      setFormStatus("メーカー名・シューズ名と10〜3000kmの廃棄距離を入力してください。メーカー名とシューズ名は合計80文字以内で入力してください。", "error");
+      return;
+    }
+    const roundedDistance = Math.round(distance * 10) / 10;
+    const publicChanged = existing && (existing.shoeName !== shoeName || existing.distance !== roundedDistance ||
+      existing.manufacturer !== manufacturer || existing.modelName !== modelName);
+    const needsCommunitySave = existing
+      ? existing.shareStatus !== "private" && (publicChanged || existing.shareStatus === "failed")
+      : COMMUNITY_ENABLED;
+    const record = existing || { id: createUuid(), createdAt: new Date().toISOString(),
+      shareStatus: COMMUNITY_ENABLED ? "failed" : "private", pendingUpdate: false };
+    if (existing && publicChanged && record.shareStatus !== "private") record.pendingUpdate = true;
+    Object.assign(record, { shoeName, manufacturer, modelName, structuredNames, pairLabel, distance: roundedDistance });
+    if (needsCommunitySave) record.shareStatus = "failed";
+    if (!existing) records.unshift(record);
+    saveRecords();
+    resetRecordForm();
+    renderAllLocal();
+
+    if (!needsCommunitySave || !COMMUNITY_ENABLED) {
+      setFormStatus(existing ? "このブラウザの記録を変更しました。" : "このブラウザに記録しました。", "success");
+      return;
+    }
+
+    setSaving(true);
+    setFormStatus(existing ? "変更を保存し、匿名統計を更新しています…" : "ブラウザに保存し、匿名統計へ送信しています…");
+    try {
+      await submitCommunity(record);
+      record.shareStatus = "shared";
+      record.pendingUpdate = false;
+      saveRecords();
+      renderAllLocal();
+      setFormStatus(existing ? "記録と匿名統計を更新しました。" : "記録を保存し、匿名統計へ提供しました。公開統計には1件目から表示されます。", "success");
+      await Promise.all([fetchShoeCatalog(), fetchCommunityStats()]);
+    } catch (error) {
+      setFormStatus(`${error.message} ブラウザ内の記録は保存されています。`, "error");
+    } finally {
+      setSaving(false);
+    }
+  });
+
+  clearAllButton.addEventListener("click", () => {
+    if (isSaving) return;
+    if (!window.confirm("このブラウザ内の記録をすべて削除します。よろしいですか？")) return;
+    records = [];
+    saveRecords();
+    resetRecordForm();
+    renderAllLocal();
+    setFormStatus("このブラウザ内の記録を削除しました。", "success");
+  });
+
+  function selectCommunityTab(view, focus = false) {
+    communityView = view;
+    renderCommunityView();
+    if (focus) (view === "top" ? communityTopTab : communitySearchTab).focus();
+  }
+
+  [communityTopTab, communitySearchTab].forEach((tab, index) => {
+    tab.addEventListener("click", () => selectCommunityTab(index === 0 ? "top" : "search"));
+    tab.addEventListener("keydown", (event) => {
+      let next;
+      if (event.key === "ArrowRight" || event.key === "ArrowLeft") next = 1 - index;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = 1;
+      else return;
+      event.preventDefault();
+      selectCommunityTab(next === 0 ? "top" : "search", true);
+    });
+  });
+  communitySearch.addEventListener("input", renderCommunityView);
+
+  renderAllLocal();
+  fetchShoeCatalog();
+  fetchCommunityStats();
+})();
+</script>

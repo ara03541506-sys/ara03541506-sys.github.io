@@ -1,30 +1,64 @@
 ---
 layout: default
 title: アプリ一覧
-description: ランニングのペース計算に使える無料アプリ一覧ページ。
+description: ランニングペース計算機と、シューズの交換目安を知るKutsuDoki（クツドキ）。ブラウザで使える無料ランニングアプリ一覧。
 permalink: /app.html
 ---
 
-<section class="max-w-6xl mx-auto p-6">
-  <h1 class="text-3xl font-bold mb-8 text-center">ランニング計算アプリ一覧</h1>
-
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-    <section class="md:col-span-3">
-      <h2 class="text-xl font-semibold mb-4">アプリ一覧</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <a href="{{ 'running/runningcalculation.html' | relative_url }}"
-           class="block bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
-          <div class="p-4">
-            <h3 class="text-lg font-bold text-orange-600 hover:underline">ペース計算アプリ</h3>
-            <p class="text-sm text-gray-600 mt-1">3000mSC対応の距離とラップ計算アプリ</p>
-          </div>
-        </a>
+<header class="app-hero">
+  <div class="app-hero__inner">
+    <div class="app-hero__copy">
+      <p class="app-hero__kicker"><span></span> RUNNER'S TOOLKIT</p>
+      <h1>走るための数字を、<br><em>もっとシンプルに。</em></h1>
+      <p>ペース設計からギアの交換時期まで。練習とレースの判断をすばやく整える、ランナーのための無料ツールです。</p>
+      <div class="app-hero__notes" aria-label="アプリの特徴">
+        <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> 登録不要</span>
+        <span><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> スマホ対応</span>
+        <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 個人データは端末に保存</span>
       </div>
-    </section>
+    </div>
+    <div class="app-hero__metric" aria-hidden="true">
+      <span class="app-hero__metric-label">TARGET PACE</span>
+      <strong>3<span>:</span>20</strong>
+      <span class="app-hero__metric-unit">/ KM</span>
+      <div class="app-hero__track"><span></span></div>
+    </div>
+  </div>
+</header>
 
-    <aside class="md:col-span-1 space-y-6">
-      {% include sidebar.html %}
-    </aside>
+<section class="page-shell app-page" aria-label="アプリ一覧">
+  <div class="app-section-heading">
+    <div>
+      <p class="section-kicker">Choose a tool</p>
+      <h2>今日の目的から選ぶ</h2>
+    </div>
+    <p>すべてブラウザですぐに使えます</p>
+  </div>
+  <div class="app-grid">
+    <a href="{{ '/running/runningcalculation.html' | relative_url }}" class="app-card">
+      <div class="app-card__visual app-card__visual--pace" aria-hidden="true">
+        <i class="fa-solid fa-stopwatch"></i>
+        <span class="app-card__number">01</span>
+      </div>
+      <div class="app-card__body">
+        <p class="app-card__eyebrow"><span></span> Pace calculator</p>
+        <h2>ランニングペース計算機</h2>
+        <p>距離と完走タイムから、100m・400m・1kmごとのペースを自動計算。3000mSCにも対応しています。</p>
+        <span class="app-card__link">ペースを計算する <i class="fa-solid fa-stopwatch" aria-hidden="true"></i></span>
+      </div>
+    </a>
+
+    <a href="{{ '/running/shoe-lifespan.html' | relative_url }}" class="app-card">
+      <div class="app-card__visual app-card__visual--shoe" aria-hidden="true">
+        <i class="fa-solid fa-shoe-prints"></i>
+        <span class="app-card__number">02</span>
+      </div>
+      <div class="app-card__body">
+        <p class="app-card__eyebrow"><span></span> Shoe tracker</p>
+        <h2>KutsuDoki（クツドキ）</h2>
+        <p>引退したシューズと走った距離を記録。シューズごとの平均・中央値から、次の一足の替えどきを知ることができます。</p>
+        <span class="app-card__link">KutsuDokiを開く <i class="fa-solid fa-shoe-prints" aria-hidden="true"></i></span>
+      </div>
+    </a>
   </div>
 </section>

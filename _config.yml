@@ -6,3 +6,7 @@ baseurl: ""
 
 plugins:
   - jekyll-sitemap
+
+supabase:
+  url: "https://qtdirrbjrecknextfrxk.supabase.co"
+  publishable_key: "sb_publishable_aqmW1bvdnRVi-XkIaoZ9Gw_d_fkUJ71"
